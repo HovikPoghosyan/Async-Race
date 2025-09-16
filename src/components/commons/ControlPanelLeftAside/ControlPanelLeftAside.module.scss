@@ -1,0 +1,42 @@
+.aside {
+   display: inline-flex;
+   flex-direction: column;
+   margin-left: 10px;
+}
+
+.row {
+   display: flex;
+   flex-direction: row;
+   margin: 10px 0;
+   justify-content: space-between;
+   line-height: 30px;
+   font-size: 24px;
+   font-weight: 600;
+   color: #ccc;
+}
+
+.nameInput {
+   outline: none;
+   background-color: #2c2933;
+   border-radius: 4px;
+   border: none;
+   border-bottom: 3px solid #423d4d;
+   color: #ccc;
+   padding: 5px 10px;
+   font-weight: 600;
+   line-height: 16px;
+   font-size: 14px;
+}
+
+.colorBox {
+   outline: none;
+   cursor: pointer;
+   background-color: #2c2933;
+   border-radius: 4px;
+   border: none;
+   border-bottom: 3px solid #423d4d;
+   height: 30px;
+   width: 30px;
+   padding: 0 2px;
+   margin: 0 10px;
+}
