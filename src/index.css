@@ -18,7 +18,8 @@ body {
 
 .wrapper {
    margin: 0 auto;
-   background-color:  #fff;
+   /* background-color:  #fff */
+   background-color: #13151f;
    display: flex;
    flex-direction: column;
 }
@@ -32,4 +33,12 @@ body {
 
 button {
    cursor: pointer;
+}
+
+a {
+   text-decoration: none;
+}
+
+li {
+   display: inline-flex;
 }

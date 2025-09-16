@@ -5,7 +5,7 @@ import styles from './Logo.module.scss';
 function Logo() {
 
    return(
-      <h1>ASYNC RACE</h1>
+      <h1 className = { styles.logo }>ASYNC RACE</h1>
    )
 }
 
