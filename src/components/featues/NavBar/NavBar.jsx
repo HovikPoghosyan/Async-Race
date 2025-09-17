@@ -9,8 +9,8 @@ function NavBar() {
    return(
       <nav className = { styles.navBar }>
          <ul>
-            <NavButton link = "garage" name = "Garage" />
-            <NavButton link = "winners" name = "Winners" />
+            <NavButton link = "garage" name = "GARAGE" />
+            <NavButton link = "winners" name = "WINNERS" />
          </ul>
       </nav>
    )

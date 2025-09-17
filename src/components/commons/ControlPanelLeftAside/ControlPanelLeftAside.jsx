@@ -10,12 +10,12 @@ function ControlPanelLeftAside() {
       <aside className = { styles.aside }>
          <div className = { styles.row }>
             <input placeholder = "Create Car" className = { styles.nameInput }/>
-            <input type = "color" name = "create car color" className = { styles.colorBox }/>
+            <input type = "color" value = "#423d4d" className = { styles.colorBox }/>
             <Button name = "Create" />
          </div>
          <div className = { styles.row }>
             <input placeholder = "Update Car" className = { styles.nameInput }/>
-            <input type = "color" name = "create car color" className = { styles.colorBox }/>
+            <input type = "color" value = "#423d4d" className = { styles.colorBox }/>
             <Button name = "Update" />
          </div>
       </aside>
