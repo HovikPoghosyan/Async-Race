@@ -34,3 +34,10 @@
 .isActive {
    border-color: $primary-color;
 }
+
+
+@media ( max-width: 576px ) {
+   .button {
+      border-bottom: none;
+   }
+}

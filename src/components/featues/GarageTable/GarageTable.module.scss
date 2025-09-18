@@ -5,21 +5,6 @@
    margin-top: 10px;
 }
 
-.tableHead {
-   display: flex;
-   flex-direction: row;
-}
-
-
-.headButton {
-   margin-right: 10px;
-
-   &:last-child {
-      margin-right: 0;
-      margin-left: auto;
-   }
-}
-
 .track {
    padding-top: 10px;
    position: relative;
@@ -53,9 +38,21 @@
    border-bottom: none;
 }
 
+@media ( max-width: 768px ) {
+   .startLine {
+      border-width: 2px;
+   }
+   .track {
+      border-width: 5px;
+   }
+}
 
 @media ( max-width: 576px ) {
    .startLine {
       left: 120px;
+      border-width: 1px;
+   }
+   .track {
+      border-width: 3px;
    }
 }

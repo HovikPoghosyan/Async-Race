@@ -42,10 +42,8 @@
 @media ( max-width: 576px ) {
    :root {
       /* Padding */
-      --padding-button: 3px 5px 2px 5px;
+      --padding-button: 3px 5px;
 
-      /* Font sizes */
-      --font-size-bigger: 18px;
       
       /* Font weights */
       --font-weight-extra-bold: 600;

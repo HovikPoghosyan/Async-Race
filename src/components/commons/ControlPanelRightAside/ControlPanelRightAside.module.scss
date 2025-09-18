@@ -23,7 +23,13 @@
    background-clip: text;
    color: transparent;
    font-size: var( --font-size-bigger );   
-   line-height: 30px;
    font-weight: var( --font-weight-extra-bold );
+}
+
+
+@media ( max-width: 576px ) {
+   .row {
+      height: 20px;
+   }
 }
 
