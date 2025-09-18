@@ -9,10 +9,10 @@ import styles from './Header.module.scss';
 function Header() {
 
    return(
-      <div className = { classNames( styles.header, 'container' )} >
+      <header className = { styles.header }>
          <Logo />
          <NavBar />
-      </div>
+      </header>
    )
 }
 

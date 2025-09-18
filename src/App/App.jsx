@@ -8,8 +8,10 @@ import styles from './App.module.scss';
 function App () {
    return(
       <div className = "wrapper">
-         <Header />
-         <Outlet />
+         <div className = "container">
+            <Header />
+            <Outlet />
+         </div>
       </div>
    )
 }

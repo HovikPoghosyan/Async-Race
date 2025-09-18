@@ -24,8 +24,9 @@
 }
 
 .button:disabled {
-  background: gray;
-  cursor: not-allowed;
+   transform: Scale( 0.97 ); 
+   background: #1c1a20;
+   cursor: not-allowed;
 }
 
 .isActive {

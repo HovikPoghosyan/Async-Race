@@ -9,10 +9,10 @@ import styles from './Garage.module.scss';
 function Garage() {
 
    return(
-      <div className = { classNames( 'container', styles.garage ) }>
+      <main>
          <GarageControlPanel />
          <GarageTable />
-      </div>
+      </main>
    )
 } 
 

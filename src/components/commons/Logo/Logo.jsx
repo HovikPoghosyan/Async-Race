@@ -8,7 +8,7 @@ function Logo() {
    return(
       <div className = { styles.logo }>
          <FontAwesomeIcon color = '#48bfeeff' flip = "horizontal"  icon = { faFlagCheckered } />
-         <h1 className = { styles.logo }>ASYNC RACE</h1>
+         <h1 className = { styles.logo }>&nbsp;ASYNC RACE&nbsp;</h1>
          <FontAwesomeIcon color = '#a001ea' icon = { faFlagCheckered } />
       </div>
    )
