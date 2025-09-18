@@ -1,12 +1,14 @@
+@import '/src/CONSTANTS/variables';
+
 .title {
-   background: linear-gradient(90deg, rgb(72, 191, 238) 10%, #a001ea 90%);
+   background: linear-gradient(90deg, $primary-color 10%, $secondary-color 90%);
    -webkit-background-clip: text;
    -webkit-text-fill-color: transparent;
    background-clip: text;
    color: transparent;
-   font-size: 24px;   
-   line-height: 24px;
-   font-weight: 800; 
+   font-size: var( --font-size-bigger );   
+   line-height: var( --font-size-bigger );
+   font-weight: var( --font-weight-extra-bold ); 
    display: inline-flex;
 }
 

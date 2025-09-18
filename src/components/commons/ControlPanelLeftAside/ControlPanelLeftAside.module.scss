@@ -1,3 +1,5 @@
+@import '/src/CONSTANTS/variables';
+
 .aside {
    display: inline-flex;
    flex-direction: column;
@@ -8,32 +10,28 @@
    flex-direction: row;
    margin: 10px 0;
    justify-content: space-between;
-   line-height: 30px;
-   font-size: 24px;
-   font-weight: 600;
-   color: #ccc;
 }
 
 .nameInput {
    outline: none;
-   background-color: #2c2933;
+   background-color: $clickable-box-background-color;
    border-radius: 4px;
    border: none;
-   border-bottom: 3px solid #423d4d;
-   color: #ccc;
+   border-bottom: 3px solid $border-color;
+   color: $text-color;
    padding: 5px 10px;
-   font-weight: 600;
+   font-weight: var( --font-weight-bold );
    line-height: 16px;
-   font-size: 14px;
+   font-size: var( --font-size-small );
 }
 
 .colorBox {
    outline: none;
    cursor: pointer;
-   background-color: #2c2933;
+   background-color: $clickable-box-background-color;
    border-radius: 4px;
    border: none;
-   border-bottom: 3px solid #423d4d;
+   border-bottom: 3px solid $border-color;
    height: 30px;
    width: 30px;
    padding: 0 2px;

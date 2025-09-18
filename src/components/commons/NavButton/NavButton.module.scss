@@ -1,12 +1,14 @@
+@import '/src/CONSTANTS/variables';
+
 .navButton {
-   padding: 6px 10px 4px 10px;
+   padding: var( --padding-button );
    margin: 0 5px;
-   line-height: 16px;
+   line-height: var( --font-size-normal );
    border-radius: 4px;
-   font-size: 16px;
-   font-weight: 800;
+   font-size: var( --font-size-normal );
+   font-weight: var(--font-weight-extra-bold);
    letter-spacing: 1px;
-   color: #ccc;
+   color: $text-color;
    cursor: pointer;
    background-color: #a001ea;
    border: none;
@@ -30,5 +32,5 @@
 }
 
 .isActive {
-   border-color: rgb(72, 191, 238);
+   border-color: $primary-color;
 }

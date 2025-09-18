@@ -1,16 +1,18 @@
+@import '/src/CONSTANTS/variables';
+
 .button {
-   padding: 5px 10px;
-   line-height: 16px;
+   padding: var( --padding-button );
    border-radius: 4px;
-   font-size: 14px;
-   font-weight: 600;
-   color: #ccc;
+   font-size: var( --font-size-small );
+   font-weight: var( --font-weight-bold );
+   color: $text-color;
    cursor: pointer;
-   background-color: #2c2933;
+   background-color: $clickable-box-background-color;
    transition: all 0.4s;
    display: inline-flex;
    border: none;
-   border-bottom: 3px solid #423d4d;
+   border-bottom: 3px solid $border-color;
+   align-items: center;
 }
 
 .button:not(:disabled):hover {
@@ -30,5 +32,5 @@
 }
 
 .isActive {
-   border-color: rgb(72, 191, 238);
+   border-color: $primary-color;
 }

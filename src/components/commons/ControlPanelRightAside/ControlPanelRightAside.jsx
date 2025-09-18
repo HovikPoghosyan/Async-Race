@@ -8,7 +8,9 @@ function ControlPanelRightAside() {
 
    return(
       <aside className = { styles.aside }>
-         <h2 className = { styles.title }>GARAGE (104 cars)</h2>
+         <div className = { styles.row }>
+            <h2 className = { styles.title }>GARAGE (104 cars)</h2>
+         </div>
          <div className = { styles.row }>
             <Button name = "Race" />
             <Button name = "Reset" />

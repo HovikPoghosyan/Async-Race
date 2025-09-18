@@ -1,7 +1,10 @@
+@import '/src/CONSTANTS/variables';
+
 .aside {
    display: inline-flex;
    flex-direction: column;
    margin-left: auto;
+   font-size: var( --font-size-bigger );     
 }
 
 .row {
@@ -9,18 +12,18 @@
    flex-direction: row;
    margin: 10px 0;
    justify-content: space-between;
+   height: 30px;
 }
 
 
 .title {
-   background: linear-gradient(90deg, rgb(72, 191, 238) 10%, #a001ea 90%);
+   background: linear-gradient(90deg, $primary-color 10%, $secondary-color 90%);
    -webkit-background-clip: text;
    -webkit-text-fill-color: transparent;
    background-clip: text;
    color: transparent;
-   font-size: 24px;   
+   font-size: var( --font-size-bigger );   
    line-height: 30px;
-   margin: 10px 0;  
-   font-weight: 800;
-   display: inline-block;
+   font-weight: var( --font-weight-extra-bold );
 }
+
