@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import classNames from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay, faStop, faCheck, faTrash } from '@fortawesome/free-solid-svg-icons';
@@ -13,12 +14,12 @@ import StartLight from '../StartLight/StartLight';
 import styles from './GarageTableRow.module.scss';
 
 function CarTrack({ carData }) {
+   const dispatch = useDispatch();
    const { id, name, color } = carData;
    const selectedCar = useSelector( store => store.list.selectedCar );
-   const dispatch = useDispatch();
-
-   const [ isSelected, setIsSelected ] = useState( false );
    const [ racing, setRacing ] = useState( false );
+   const [ speed, setSpeed ] = useState( 0 );
+   const animationStyle = { animation: `${ styles.moveToEnd } ${ speed }s linear 4.2s forwards` };
    
    return(
       <div className = { styles.carTrack}>
@@ -31,7 +32,11 @@ function CarTrack({ carData }) {
                name = { <FontAwesomeIcon icon = { faPlay } color = "#28a745" /> }
                functionality = { () => { 
                   setRacing( true );
-                  fetchCarDrive( id, 'started' );
+                  fetchCarDrive( id, 'started' )
+                  .then( response => {
+                     console.log('data: ', response)
+                     setSpeed( response.distance / ( response.velocity * 2000 ) )
+                  } );
                }}
             />
             <Button 
@@ -40,7 +45,7 @@ function CarTrack({ carData }) {
                name = { <FontAwesomeIcon icon = { faStop } color = "#ffc107" /> }
                functionality = { () => {
                   setRacing( false );
-                  fetchCarDrive( id, 'stopped' )
+                  fetchCarDrive( id, 'stopped' );
                }}
             />
             <Button 
@@ -55,7 +60,13 @@ function CarTrack({ carData }) {
                functionality = { () => dispatch( deleteCar( id ) ) }
             />
          </div>
-         <CarIcon style = { styles.car } width = { 100 } height = { 42 }  fill = { color } />
+         <CarIcon 
+            className = { styles.car }
+            style = { racing ? animationStyle : {} }
+            width = { 100 } 
+            height = { 42 }  
+            fill = { color } 
+         />
       </div>
    )
 }

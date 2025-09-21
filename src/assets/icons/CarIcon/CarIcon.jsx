@@ -1,6 +1,6 @@
 import React from 'react';
 
-function CarIcon({ width = 100, height = 100, fill = "#ccc", style }) {
+function CarIcon({ width = 100, height = 100, fill = "#ccc", className, style }) {
 
    return (
       <svg
@@ -10,7 +10,8 @@ function CarIcon({ width = 100, height = 100, fill = "#ccc", style }) {
          viewBox="0 0 512.000000 212.000000"
          preserveAspectRatio="xMidYMid meet"
          fill={ fill }
-         className={ style }
+         className={ className }
+         style={ style } 
       >
          <g
             transform="translate(0.000000,212.000000) scale(0.100000,-0.100000)"
