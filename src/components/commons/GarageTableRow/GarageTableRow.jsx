@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay, faStop, faCheck, faTrash } from '@fortawesome/free-solid-svg-icons';
 
-import { fetchCarStart } from 'CONSTANTS/Axios';
+import { fetchCarDrive } from 'CONSTANTS/Axios';
 import { deleteCar } from 'store/modules/listReducer';
 
 import Button from 'components/commons/Button/Button';
@@ -29,15 +29,18 @@ function CarTrack({ carData }) {
                style = { styles.controlBlockBtn } 
                name = { <FontAwesomeIcon icon = { faPlay } color = "#28a745" /> }
                functionality = { () => { 
-                  setRacing( true )
-                  fetchCarStart( id, 'started' )
-               } }
+                  setRacing( true );
+                  fetchCarDrive( id, 'started' );
+               }}
             />
             <Button 
                isDisable = { !racing }
                style = { styles.controlBlockBtn } 
                name = { <FontAwesomeIcon icon = { faStop } color = "#ffc107" /> }
-               functionality = { () => setRacing( false ) }
+               functionality = { () => {
+                  setRacing( false );
+                  fetchCarDrive( id, 'stopped' )
+               }}
             />
             <Button 
                style = { styles.controlBlockBtn } 

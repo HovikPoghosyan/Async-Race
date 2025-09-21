@@ -70,13 +70,15 @@ const fetchDeleteCar = async( id ) => {
    return data;
 };
 
-const fetchCarStart = async( id, status ) => {
+const fetchCarDrive = async( id, status ) => {
    const queryParams = new URLSearchParams({ id, status });
    const data = await ajax( `${ URLS.engine }?${ queryParams.toString() }`, {
       method: 'PATCH',
       headers: { },
       data: { }
    } );
+
+   console.log('data: ', data);
 
    return data;
 }
@@ -86,6 +88,6 @@ export {
    fetchWinnersList,
    fetchDeleteCar,
    fetchNewCar,
-   fetchCarStart,
+   fetchCarDrive,
 };
 export default ajax;

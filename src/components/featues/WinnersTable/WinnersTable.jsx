@@ -7,7 +7,6 @@ import styles from './WinnersTable.module.scss';
 
 function WinnersTable({ list }) {
    const [ pageNo, setPageNo ] = useState( 1 ); 
-   console.log('winners list: ', list)
 
    const handlePageChange = No => setPageNo( No );
    const visibleitemsCount = 10;

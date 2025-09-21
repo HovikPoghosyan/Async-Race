@@ -24,7 +24,7 @@ function Winners() {
                ?  <LoadingCircle />
                :  winnersList[0] 
                   ?  <WinnersTable list = { winnersList }/>
-                  :  <NotFoundMessage message = "No winners yet. Stay tuned!"/>
+                  :  <NotFoundMessage message = "No winners at the moment. Keep watching!"/>
          }
       </main>
    )
