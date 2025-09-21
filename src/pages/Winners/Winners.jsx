@@ -1,12 +1,16 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrophy } from '@fortawesome/free-solid-svg-icons';
 
+import WinnersTable from 'components/featues/WinnersTable/WinnersTable';
+import LoadingCircle from 'components/featues/LoadingCircle/LoadingCircle';
+import NotFoundMessage from 'components/commons/NotFoundMessage/NotFoundMessage';
+
 import styles from './Winners.module.scss';
 
-import WinnersTable from 'components/featues/WinnersTable/WinnersTable';
-
 function Winners() {
+   const { winnersList, loading } = useSelector( state => state.list );
 
    return(
       <main>
@@ -15,7 +19,13 @@ function Winners() {
             <h2 className = { styles.title }>&nbsp;WINNERS&nbsp;</h2>
             <FontAwesomeIcon size = "2x" color = "#a001ea" icon = { faTrophy } />
          </div>
-         <WinnersTable />
+         {
+            loading 
+               ?  <LoadingCircle />
+               :  winnersList[0] 
+                  ?  <WinnersTable list = { winnersList }/>
+                  :  <NotFoundMessage message = "No winners yet. Stay tuned!"/>
+         }
       </main>
    )
 }

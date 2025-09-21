@@ -1,0 +1,9 @@
+@import '/src/CONSTANTS/variables';
+
+.message {
+   text-align: center;
+   color: #ccc;
+   margin: auto;
+   font-size: var( --font-size-bigger );   
+   font-weight: var( --font-weight-extra-bold );
+}

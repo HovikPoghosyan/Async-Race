@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ControlPanelLeftAside from 'components/commons/ControlPanelLeftAside/ControlPanelLeftAside';
+import ControlPanelForm from 'components/commons/ControlPanelForm/ControlPanelForm';
 import ControlPanelRightAside from 'components/commons/ControlPanelRightAside/ControlPanelRightAside';
 
 import styles from './GarageControlPanel.module.scss';
@@ -9,7 +9,7 @@ function GarageControlPanel() {
 
    return(
       <div className = { styles.panel }>
-         <ControlPanelLeftAside />
+         <ControlPanelForm />
          <ControlPanelRightAside />
       </div>
    )

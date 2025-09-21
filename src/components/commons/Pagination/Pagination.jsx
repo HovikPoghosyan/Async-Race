@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
    faArrowRight,
@@ -9,13 +9,21 @@ import Button from 'components/commons/Button/Button';
 
 import styles from './Pagination.module.scss';
 
-function Pagination() {
+function Pagination({ count, pageNo, changePage, visibleitemsCount }) {
 
    return(
       <div className = { styles.pagination }>
-         <Button name = { <span><FontAwesomeIcon icon = { faArrowLeft } /> Previous Page</span> }/>
-         <p>Page No.13</p>
-         <Button name = { <span>Next Page <FontAwesomeIcon icon = { faArrowRight } /></span> }/>
+         <Button 
+            name = { <span><FontAwesomeIcon icon = { faArrowLeft } /> Previous Page</span> }
+            isDisable = { pageNo == 1 }
+            functionality = { () => changePage( pageNo - 1 ) }
+         />
+         <p>{ `Page No.${ pageNo }` }</p>
+         <Button 
+            name = { <span>Next Page <FontAwesomeIcon icon = { faArrowRight } /></span> }
+            isDisable = { pageNo == Math.ceil( count / visibleitemsCount )}
+            functionality = { () => changePage( pageNo + 1 ) }
+         />
       </div>
    )
 }

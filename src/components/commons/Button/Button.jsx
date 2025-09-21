@@ -7,7 +7,7 @@ function Button({ name, functionality, isDisable = false, style, isActive = fals
 
    return(
       <button
-         disabled = { isDisable } 
+         disabled = { isDisable || isActive } 
          onClick = { functionality }
          className = { classnames( { [ styles.isActive ]:  isActive }, styles.button, style ) }
       >
