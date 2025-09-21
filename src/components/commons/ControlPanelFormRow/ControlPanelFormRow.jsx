@@ -1,35 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Button from '../Button/Button';
 
 import styles from './ControlPanelFormRow.module.scss';
 
-function ControlPanelFormRow({ placeholder, btnName, handleSubmit }) {
-   const [ name, setName ] = useState( '' );
-   const [ color, setColor ] = useState( '#423d4d' );
-
+function ControlPanelFormRow({ namePlaceholder, name, color, handleName, handleColor, handleSubmit, btnName, isDisable }) {
+   
    return(
       <div className = { styles.row }>
          <input 
-            placeholder = { placeholder } 
+            placeholder = { namePlaceholder } 
             value = { name }
-            onChange = { event  => setName( event.target.value )}
+            onChange = { handleName }
             className = { styles.nameInput }
          />
          <input 
             type = "color" 
             value = { color } 
-            onChange = { event  => setColor( event.target.value ) }
+            onChange = { handleColor }
             className = { styles.colorBox }
          />
          <Button 
             name = { btnName } 
-            isDisable = { !name } 
+            isDisable = { isDisable } 
             functionality = { event => {
                event.preventDefault();
-               setName( '' );
-               setColor( '#423d4d' );
-               return handleSubmit({ name, color });
+               handleSubmit();
             } }
          />
       </div>

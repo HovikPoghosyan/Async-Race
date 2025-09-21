@@ -70,6 +70,17 @@ const fetchDeleteCar = async( id ) => {
    return data;
 };
 
+const fetchUpdateCar = async( carData ) => {
+   console.log('caarData: ', carData)
+   const data = await ajax( `${ URLS.garage }/${ carData.id }`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      data: { ...carData }
+   } );
+
+   return data;
+};
+
 const fetchCarDrive = async( id, status ) => {
    const queryParams = new URLSearchParams({ id, status });
    const data = await ajax( `${ URLS.engine }?${ queryParams.toString() }`, {
@@ -78,14 +89,13 @@ const fetchCarDrive = async( id, status ) => {
       data: { }
    } );
 
-   console.log('data: ', data);
-
    return data;
 }
 
 export {
    fetchGarageList,
    fetchWinnersList,
+   fetchUpdateCar,
    fetchDeleteCar,
    fetchNewCar,
    fetchCarDrive,

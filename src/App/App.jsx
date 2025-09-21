@@ -13,8 +13,7 @@ function App () {
    const dispatch = useDispatch();
    
    useEffect(() => {
-      dispatch( getGarageLists() )
-      .then( () => { dispatch( getWinnersLists() ) });
+      dispatch( getGarageLists() );
    }, [])
    
    return(

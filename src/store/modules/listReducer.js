@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-import { fetchGarageList, fetchWinnersList, fetchNewCar, fetchDeleteCar } from 'CONSTANTS/Axios';
+import { fetchGarageList, fetchWinnersList, fetchNewCar, fetchDeleteCar, fetchUpdateCar } from 'CONSTANTS/Axios';
 
 const addNewCar = createAsyncThunk(
    'list/addNewCar',
@@ -11,6 +11,20 @@ const addNewCar = createAsyncThunk(
       dispatch( getGarageLists() ).unwrap();
 
       return data;
+   }
+);
+
+const updateCar = createAsyncThunk(
+   'list/updateCar',
+   async ( carData, { rejectWithValue, dispatch }) => {
+      const data = await fetchUpdateCar( carData );
+      if ( data?.isFailed ) return rejectWithValue();
+      
+      console.log('data: ', data);
+
+      dispatch( getGarageLists() ).unwrap();
+
+      return null;
    }
 );
 
@@ -53,6 +67,7 @@ const getWinnersLists = createAsyncThunk(
 const initialState = {
    garageList: [],
    winnersList: [],
+   selectedCar: undefined,
    loading: false,
 };
 
@@ -60,16 +75,22 @@ const appSlice = createSlice({
    name: 'list',
    initialState,
    reducers: {
-      setGarageList( state, { payload } ) {
-         state.garageList = payload;
-      },
+      setSelectedCar( state, { payload } ) {
+         state.selectedCar = payload;
+      }
    },
    extraReducers: ( builder ) => {
       builder
-      .addCase( deleteCar.pending, ( state ) => {
+      .addCase( deleteCar.pending, ( state, { meta } ) => {
+         if ( meta.arg == state.selectedCar.id ) {
+            state.selectedCar = undefined;
+         }
          state.loading = true;
       })
       .addCase( addNewCar.pending, ( state ) => {
+         state.loading = true;
+      })
+      .addCase( updateCar.pending, ( state ) => {
          state.loading = true;
       })
       .addCase( getGarageLists.pending, ( state ) => {
@@ -99,11 +120,13 @@ const appSlice = createSlice({
 });
 
 export const { 
+   setSelectedCar,
 } = appSlice.actions;
 export { 
    getGarageLists,
    getWinnersLists,
    addNewCar,
+   updateCar,
    deleteCar,
 };
 export default appSlice.reducer;

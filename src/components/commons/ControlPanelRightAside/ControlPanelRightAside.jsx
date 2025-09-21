@@ -7,7 +7,7 @@ import styles from './ControlPanelRightAside.module.scss';
 
 function ControlPanelRightAside() {
    const garageList = useSelector( state => state.list.garageList );
-
+   
    return(
       <aside className = { styles.aside }>
          <div className = { styles.row }>

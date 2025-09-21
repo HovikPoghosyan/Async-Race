@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay, faStop, faCheck, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 import { fetchCarDrive } from 'CONSTANTS/Axios';
-import { deleteCar } from 'store/modules/listReducer';
+import { deleteCar, setSelectedCar } from 'store/modules/listReducer';
 
 import Button from 'components/commons/Button/Button';
 import CarIcon from 'assets/icons/CarIcon/CarIcon';
@@ -14,6 +14,7 @@ import styles from './GarageTableRow.module.scss';
 
 function CarTrack({ carData }) {
    const { id, name, color } = carData;
+   const selectedCar = useSelector( store => store.list.selectedCar );
    const dispatch = useDispatch();
 
    const [ isSelected, setIsSelected ] = useState( false );
@@ -44,8 +45,8 @@ function CarTrack({ carData }) {
             />
             <Button 
                style = { styles.controlBlockBtn } 
-               name = { <FontAwesomeIcon icon = { faCheck } color = { isSelected ? "#48bfeeff" : "#ccc" } /> }
-               functionality = { () => setIsSelected( !isSelected ) }
+               name = { <FontAwesomeIcon icon = { faCheck } color = { selectedCar?.id == id ? "#48bfeeff" : "#ccc" } /> }
+               functionality = { () => dispatch( setSelectedCar( selectedCar?.id == id ? undefined : carData ) ) }
             />
             <Button 
                isDisable = { racing }
