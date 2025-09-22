@@ -20,6 +20,14 @@
    animation-timing-function: linear;
    animation-delay: 4.2s;
    animation-fill-mode: forwards;
+   transition: all 0s;
+}
+
+.racingAnimation {
+   animation-timing-function: linear;
+   animation-delay: 4.2s;
+   animation-fill-mode: forwards;
+   animation-name: moveToEnd;
 }
 
 @keyframes moveToEnd {
@@ -29,6 +37,10 @@
    100% {
       margin-left: calc( 100% - 100px);
    }
+}
+
+.inTheEnd {
+   margin-left: calc( 100% - 100px);
 }
 
 .controlBlock {

@@ -10,7 +10,7 @@ import Button from 'components/commons/Button/Button';
 import styles from './Pagination.module.scss';
 
 function Pagination({ count, pageNo, changePage, visibleitemsCount }) {
-
+   
    return(
       <div className = { styles.pagination }>
          <Button 

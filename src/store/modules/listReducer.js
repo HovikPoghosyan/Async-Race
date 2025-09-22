@@ -1,6 +1,26 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
+import { getRandomCarName, getRandomColor } from 'CONSTANTS/CarData'
+
 import { fetchGarageList, fetchWinnersList, fetchNewCar, fetchDeleteCar, fetchUpdateCar } from 'CONSTANTS/Axios';
+
+const generateCars = createAsyncThunk(
+   'list/generateCars',
+   async ( count, { rejectWithValue, dispatch }) => {
+      for ( let index = 0; index < count; index++ ) {
+         const data = await fetchNewCar({
+            name: getRandomCarName(),
+            color: getRandomColor(),
+         });
+
+         if ( data.isFailed ) return rejectWithValue();
+      }
+      
+      dispatch( getGarageLists() ).unwrap();
+
+      return;
+   }
+);
 
 const addNewCar = createAsyncThunk(
    'list/addNewCar',
@@ -19,8 +39,6 @@ const updateCar = createAsyncThunk(
    async ( carData, { rejectWithValue, dispatch }) => {
       const data = await fetchUpdateCar( carData );
       if ( data?.isFailed ) return rejectWithValue();
-      
-      console.log('data: ', data);
 
       dispatch( getGarageLists() ).unwrap();
 
@@ -31,7 +49,6 @@ const updateCar = createAsyncThunk(
 const deleteCar = createAsyncThunk(
    'list/deleteCar',
    async ( id, { rejectWithValue, dispatch }) => {
-      console.log('deleting: ', id)
       const data = await fetchDeleteCar( id );
       if ( data.isFailed ) return rejectWithValue();
       
@@ -77,14 +94,17 @@ const appSlice = createSlice({
    reducers: {
       setSelectedCar( state, { payload } ) {
          state.selectedCar = payload;
-      }
+      },
    },
    extraReducers: ( builder ) => {
       builder
       .addCase( deleteCar.pending, ( state, { meta } ) => {
-         if ( meta.arg == state.selectedCar.id ) {
+         if ( meta.arg == state?.selectedCar?.id ) {
             state.selectedCar = undefined;
-         }
+         } 
+         state.loading = true;
+      })
+      .addCase( generateCars.pending, ( state ) => {
          state.loading = true;
       })
       .addCase( addNewCar.pending, ( state ) => {
@@ -125,6 +145,7 @@ export const {
 export { 
    getGarageLists,
    getWinnersLists,
+   generateCars,
    addNewCar,
    updateCar,
    deleteCar,

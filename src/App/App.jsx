@@ -4,8 +4,7 @@ import { Outlet } from 'react-router-dom';
 
 import Header from 'components/layouts/Header/Header';
 
-import { getGarageLists, getWinnersLists } from 'store/modules/listReducer';
-import { fetchDeleteCar, fetchNewCar } from 'CONSTANTS/Axios';
+import { getGarageLists } from 'store/modules/listReducer';
 
 import styles from './App.module.scss';
 
@@ -13,7 +12,16 @@ function App () {
    const dispatch = useDispatch();
    
    useEffect(() => {
-      dispatch( getGarageLists() );
+      dispatch( getGarageLists() ).then( ({ payload }) => {
+         if ( !payload?.isFail ) {
+            sessionStorage.setItem( 'garageRaceStatusesHistory', JSON.stringify(
+               Object.fromEntries( payload.map(car => [car.id, 'stopped']) )
+            ));
+            sessionStorage.setItem( 'tablesPagesHistory', JSON.stringify(
+               { garageTable: 1, winnersTable: 1 }
+            ));
+         }
+      });
    }, [])
    
    return(

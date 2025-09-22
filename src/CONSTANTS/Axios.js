@@ -71,7 +71,6 @@ const fetchDeleteCar = async( id ) => {
 };
 
 const fetchUpdateCar = async( carData ) => {
-   console.log('caarData: ', carData)
    const data = await ajax( `${ URLS.garage }/${ carData.id }`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },

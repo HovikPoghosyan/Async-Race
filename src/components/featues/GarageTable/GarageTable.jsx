@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+
+import { handleTablesPagesHistory } from 'Storages/SessionStorage';
 
 import FinishLine from 'components/commons/FinishLine/FinishLine';
 import GarageTableRow from 'components/commons/GarageTableRow/GarageTableRow';
@@ -7,10 +9,16 @@ import Pagination from 'components/commons/Pagination/Pagination';
 import styles from './GarageTable.module.scss';
 
 function GarageTable({ list }) {
-   const [ pageNo, setPageNo ] = useState( 1 ); 
+   const pageInHistory = handleTablesPagesHistory( 'getItem', { key: 'garageTable' } );
+   const visibleitemsCount = 7;
+   const maxPageCount = Math.ceil( list.length / visibleitemsCount );
+   const [ pageNo, setPageNo ] = useState( pageInHistory <= maxPageCount ? pageInHistory : maxPageCount ); 
 
    const handlePageChange = No => setPageNo( No );
-   const visibleitemsCount = 7;
+
+   useEffect( () => {
+      handleTablesPagesHistory( 'update', { key: 'garageTable', newValue: pageNo } )
+   }, [ pageNo ]);
 
    return(
       <div className = { styles.garageTable }>
@@ -20,7 +28,7 @@ function GarageTable({ list }) {
             {
                list
                .slice(( pageNo - 1 ) * visibleitemsCount, pageNo * visibleitemsCount )
-               .map( car => <GarageTableRow key = { car.id + " " + Math.random() } carData = { car } />)
+               .map( car => <GarageTableRow key = { car.id } carData = { car } />)
             }
          </div>
          {

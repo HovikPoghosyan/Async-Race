@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+
+import { handleTablesPagesHistory } from 'Storages/SessionStorage';
 
 import WinnersTableRow from 'components/commons/WinnersTableRow/WinnersTableRow';
 import Pagination from 'components/commons/Pagination/Pagination';
@@ -6,10 +8,16 @@ import Pagination from 'components/commons/Pagination/Pagination';
 import styles from './WinnersTable.module.scss';
 
 function WinnersTable({ list }) {
-   const [ pageNo, setPageNo ] = useState( 1 ); 
+   const pageInHistory = handleTablesPagesHistory( 'getItem', { key: 'winnersTable' } );
+   const visibleitemsCount = 10;
+   const maxPageCount = Math.ceil( list.length / visibleitemsCount );
+   const [ pageNo, setPageNo ] = useState( pageInHistory <= maxPageCount ? pageInHistory : maxPageCount ); 
+
+   useEffect( () => {
+      handleTablesPagesHistory( 'update', { key: 'winnersTable', newValue: pageNo } )
+   }, [ pageNo ]);
 
    const handlePageChange = No => setPageNo( No );
-   const visibleitemsCount = 10;
    return(
       <>
          <table className = { styles.table } >
