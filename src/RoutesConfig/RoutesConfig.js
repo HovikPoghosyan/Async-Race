@@ -11,7 +11,7 @@ function routesConfig() {
    return createBrowserRouter([
 
       {
-         path: '/',
+         path: '/Async-Race',
          element: <App />,
          children: [
             {
