@@ -1,0 +1,37 @@
+.finishLine {
+   display: flex;
+   height: 100%;
+   width: 20px;
+   overflow: hidden;
+   border: none;
+   position: absolute;
+   right: 0;
+   left: auto;
+   bottom: 0;
+   margin: auto;
+   z-index: 2;
+}
+
+.background {
+   width: 5px;
+   height: 100%;
+   background: white;
+   border: 5px solid; 
+   border-image: repeating-linear-gradient(
+      0deg,      
+      black 0 5px,
+      white 5px 10px
+   ) 1;
+   border-left: none;
+   border-top: none;
+   border-bottom: none;
+
+   &:nth-child(even) {
+      border-image: repeating-linear-gradient(
+         0deg,      
+         white 0 5px,
+         black 5px 10px
+      ) 1;
+   }
+
+}

@@ -1,0 +1,12 @@
+@import '/src/CONSTANTS/variables';
+
+.logo {
+   background: linear-gradient(90deg, $primary-color 10%, $secondary-color 90%);
+   -webkit-background-clip: text;
+   -webkit-text-fill-color: transparent;
+   background-clip: text;
+   color: transparent;
+   font-size: var( --font-size-biggest );
+   font-weight: var( --font-weight-extra-bold );
+   display: inline-block;
+}

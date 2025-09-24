@@ -1,0 +1,63 @@
+@import '/src/CONSTANTS/variables';
+
+.garageTable {
+   width: 100%;
+   margin-top: 10px;
+}
+
+.track {
+   padding-top: 10px;
+   position: relative;
+   margin-top: 20px;
+   width: 100%;
+   border: 10px solid transparent;
+   border-left: 0;
+   border-right: 0;
+   border-image-slice: 1;
+   border-image-source: linear-gradient(90deg,$primary-color 10%, $secondary-color 90%);
+   display: grid;
+   gap: 10px;
+}
+
+.startLine {
+   position: absolute;
+   writing-mode: vertical-rl; 
+   text-orientation: upright;
+   height: 100%;
+   text-align: center;
+   font-size: var( --font-size-bigger );
+   letter-spacing: 10px;
+   font-weight: var( --font-weight-extra-bold );
+   z-index: 2;
+   left: 133px;
+   background-color: #13151f;
+   color: $text-color;
+   border: 2px solid $primary-color;
+   border-top: none;
+   border-bottom: none;
+}
+
+
+@media ( max-width: 992px ) {
+   .startLine {
+      left: 123px;
+   }
+}
+@media ( max-width: 768px ) {
+   .startLine {
+      border-width: 2px;
+   }
+   .track {
+      border-width: 5px;
+   }
+}
+
+@media ( max-width: 576px ) {
+   .startLine {
+      left: 115px;
+      border-width: 1px;
+   }
+   .track {
+      border-width: 3px;
+   }
+}

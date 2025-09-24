@@ -1,0 +1,36 @@
+@import '/src/CONSTANTS/variables';
+
+.navButton {
+   padding: var( --padding-button );
+   margin: 0 5px;
+   line-height: var( --font-size-normal );
+   border-radius: 4px;
+   font-size: var( --font-size-normal );
+   font-weight: var(--font-weight-extra-bold);
+   letter-spacing: 1px;
+   color: $text-color;
+   cursor: pointer;
+   background-color: #a001ea;
+   border: none;
+   border-bottom: 3px solid #ccc;
+   transition: all 0.4s;
+}
+
+.navButton:hover {
+   transform: Scale( 1.03 );
+   background-color: #8100bd;
+}
+
+.navButton:active {
+   transform: Scale( 0.97 ); 
+   background-color: #7000a3;
+}
+
+.navButton.disabled {
+  background: gray;
+  cursor: not-allowed;
+}
+
+.isActive {
+   border-color: $primary-color;
+}

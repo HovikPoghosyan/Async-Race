@@ -1,0 +1,19 @@
+@import '/src/CONSTANTS/variables';
+
+.title {
+   background: linear-gradient(90deg, $primary-color 10%, $secondary-color 90%);
+   margin-top: 10px;
+   -webkit-background-clip: text;
+   -webkit-text-fill-color: transparent;
+   background-clip: text;
+   color: transparent;
+   font-size: var( --font-size-bigger );   
+   line-height: var( --font-size-bigger );
+   font-weight: var( --font-weight-extra-bold ); 
+   display: inline-flex;
+}
+
+.winnersHead {
+   text-align: center;
+   margin: 13px 0; 
+}
