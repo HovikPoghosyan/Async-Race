@@ -2,7 +2,7 @@
   "name": "async-race",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://HovikPoghosyan.github.io/Async-Race",
+  "homepage": "https://hovikpoghosyan.github.io/Async-Race/",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^7.0.1",
     "@fortawesome/free-solid-svg-icons": "^7.0.1",
