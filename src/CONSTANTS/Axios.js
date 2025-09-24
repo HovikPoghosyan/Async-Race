@@ -91,12 +91,52 @@ const fetchCarDrive = async( id, status ) => {
    return data;
 }
 
+const fetchNewWinner = async( carData ) => {
+   const data = await ajax( URLS.winners, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      data: { 
+         id: carData.id,
+         wins: 1,
+         time: carData.time,
+      }
+   } );
+
+   return data;
+}
+
+const fetchDeleteWinner = async( id ) => {
+   const data = await ajax( `${ URLS.winners }/${ id }`, {
+      method: 'DELETE',
+      headers: { },
+      data: { }
+   } );
+
+   return data;
+}
+
+const fetchUpdateWinner = async( carData ) => {
+   const data = await ajax( `${ URLS.winners }/${ carData.id }`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      data: { 
+         wins: carData.wins + 1,
+         time: carData.time,
+      }
+   } );
+
+   return data;
+}
+
 export {
+   fetchDeleteWinner,
    fetchGarageList,
    fetchWinnersList,
    fetchUpdateCar,
    fetchDeleteCar,
    fetchNewCar,
    fetchCarDrive,
+   fetchNewWinner,
+   fetchUpdateWinner,
 };
 export default ajax;

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import classNames from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlay, faStop, faCheck, faTrash, faRefresh } from '@fortawesome/free-solid-svg-icons';
+import { faPlay, faStop, faCheck, faTrash, faRefresh, faSliders } from '@fortawesome/free-solid-svg-icons';
 
 import Button from 'components/commons/Button/Button';
 import CarIcon from 'assets/icons/CarIcon/CarIcon';
@@ -25,7 +25,6 @@ function GarageTableRow({ carData }) {
       handleFinish,
    } = UseGarageTableRow( carData );
    
-
    return(
       <div className = { styles.carTrack }>
          <h4 className = { styles.carName }>{ name }</h4>
@@ -46,7 +45,7 @@ function GarageTableRow({ carData }) {
             <Button 
                isDisable = { raceStatus == "started" }
                style = { styles.controlBlockBtn } 
-               name = { <FontAwesomeIcon icon = { faCheck } color = { selectedCar?.id == id ? "#48bfeeff" : "#ccc" } /> }
+               name = { <FontAwesomeIcon icon = { faSliders } color = { selectedCar?.id == id ? "#48bfeeff" : "#ccc" } /> }
                functionality = { toggleSelect }
             />
             <Button 
@@ -57,7 +56,7 @@ function GarageTableRow({ carData }) {
             />
          </div>
          <CarIcon 
-            handleAnimationEnd={ handleFinish }
+            handleAnimationEnd = { handleFinish }
             className = { classNames( styles.car,
                { [ styles.racingAnimation ] : raceStatus == "started" },
                { [ styles.inTheEnd ] : raceStatus == "finished" },

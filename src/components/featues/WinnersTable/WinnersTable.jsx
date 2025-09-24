@@ -16,7 +16,6 @@ function WinnersTable({ list }) {
    useEffect( () => {
       handleTablesPagesHistory( 'update', { key: 'winnersTable', newValue: pageNo } )
    }, [ pageNo ]);
-
    const handlePageChange = No => setPageNo( No );
    return(
       <>

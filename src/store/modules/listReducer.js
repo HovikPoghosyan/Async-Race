@@ -2,7 +2,16 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 import { getRandomCarName, getRandomColor } from 'CONSTANTS/CarData'
 
-import { fetchGarageList, fetchWinnersList, fetchNewCar, fetchDeleteCar, fetchUpdateCar } from 'CONSTANTS/Axios';
+import { 
+   fetchGarageList,
+   fetchWinnersList,
+   fetchNewCar,
+   fetchDeleteCar,
+   fetchUpdateCar,
+   fetchNewWinner,
+   fetchUpdateWinner,
+   fetchDeleteWinner,
+} from 'CONSTANTS/Axios';
 
 const generateCars = createAsyncThunk(
    'list/generateCars',
@@ -34,6 +43,30 @@ const addNewCar = createAsyncThunk(
    }
 );
 
+const newWinner = createAsyncThunk(
+   'list/newWinner',
+   async ( carData, { rejectWithValue, dispatch }) => {
+      const data = await fetchNewWinner( carData );
+      if ( data.isFailed ) return rejectWithValue();
+      
+      dispatch( getWinnersLists() ).unwrap();
+
+      return data;
+   }
+);
+
+const updateWinner = createAsyncThunk(
+   'list/updateWinner',
+   async ( carData, { rejectWithValue, dispatch }) => {
+      const data = await fetchUpdateWinner( carData );
+      if ( data.isFailed ) return rejectWithValue();
+      
+      dispatch( getWinnersLists() ).unwrap();
+
+      return data;
+   }
+);
+
 const updateCar = createAsyncThunk(
    'list/updateCar',
    async ( carData, { rejectWithValue, dispatch }) => {
@@ -50,6 +83,7 @@ const deleteCar = createAsyncThunk(
    'list/deleteCar',
    async ( id, { rejectWithValue, dispatch }) => {
       const data = await fetchDeleteCar( id );
+      fetchDeleteWinner( id );
       if ( data.isFailed ) return rejectWithValue();
       
       dispatch( getGarageLists() ).unwrap();
@@ -86,8 +120,10 @@ const initialState = {
    winnersList: [],
    selectedCar: undefined,
    loading: false,
+   race: false,
+   winner: undefined,
 };
-
+   
 const appSlice = createSlice({
    name: 'list',
    initialState,
@@ -95,6 +131,14 @@ const appSlice = createSlice({
       setSelectedCar( state, { payload } ) {
          state.selectedCar = payload;
       },
+      setRace( state, { payload } ) {
+         if ( payload != 'finished' ) state.winner = undefined;
+         state.race = payload
+      },
+      setWinner( state, { payload } ) {
+         state.race = 'finished';
+         state.winner = payload;
+      }
    },
    extraReducers: ( builder ) => {
       builder
@@ -105,7 +149,15 @@ const appSlice = createSlice({
          state.loading = true;
       })
       .addCase( generateCars.pending, ( state ) => {
-         state.loading = true;
+         state.loading = true;   
+      })
+      .addCase( newWinner.pending, ( state, { meta} ) => {
+         state.race = 'finished';
+         state.winner = meta.arg;
+      })
+      .addCase( updateWinner.pending, ( state, { meta} ) => {
+         state.race = 'finished';
+         state.winner = meta.arg;
       })
       .addCase( addNewCar.pending, ( state ) => {
          state.loading = true;
@@ -120,17 +172,17 @@ const appSlice = createSlice({
          state.garageList = payload;
       })
       .addCase( getWinnersLists.pending, ( state ) => {
-         state.loading = true;
       })
       .addCase( getWinnersLists.fulfilled, ( state, { payload } ) => {
-         state.winnersList = payload.map( winner => {
+         const restyleList = payload.map( winner => {
             const car = state.garageList.find( current => current.id === winner.id );
             if ( car?.name && car?.color ) return {
                ...winner,
                name: car?.name ?? 'Unknown',
                color: car?.color ?? '#000',
             };
-         }) ;
+         });
+         state.winnersList = restyleList.filter( item => item );
          state.loading = false;
       })
       .addCase( getWinnersLists.rejected, ( state ) => {
@@ -140,6 +192,7 @@ const appSlice = createSlice({
 });
 
 export const { 
+   setRace,
    setSelectedCar,
 } = appSlice.actions;
 export { 
@@ -149,5 +202,7 @@ export {
    addNewCar,
    updateCar,
    deleteCar,
+   newWinner,
+   updateWinner,
 };
 export default appSlice.reducer;

@@ -7,22 +7,22 @@ import { setSelectedCar } from 'store/modules/listReducer';
 function UseControlPanelForm() {
    const dispatch = useDispatch();
    const selectedCar = useSelector( store => store.list.selectedCar );
-   const [ newCar, setNewCar ] = useState({ name: '', color: '#423d4d' });
-   const [ updatedCar, setUpdatedCar ] = useState({ name: '', color: '#423d4d' });
+   const [ newCar, setNewCar ] = useState({ name: '', color: '#48bfee' });
+   const [ updatedCar, setUpdatedCar ] = useState({ name: '', color: '#48bfee' });
    const [ updateBtnDisable, setUpdateBtnDisable ] = useState( true );
    
    useEffect(() => {
       if ( !!selectedCar ) setUpdatedCar({ name: selectedCar.name, color: selectedCar.color });
-      else setUpdatedCar({ name: '', color: '#423d4d' });
+      else setUpdatedCar({ name: '', color: '#48bfee' });
    }, [ selectedCar ]);
 
    const submitNewCar = () => {
       dispatch( addNewCar( newCar ) );
-      setNewCar({ name: '', color: '#423d4d' });
+      setNewCar({ name: '', color: '#48bfee' });
    };
    const submitUpdatedCar = () => {
       dispatch( updateCar({ ...selectedCar, ...updatedCar }) )
-      setUpdatedCar({ name: '', color: '#423d4d' });
+      setUpdatedCar({ name: '', color: '#48bfee' });
       dispatch( setSelectedCar( undefined ) );
    };
 

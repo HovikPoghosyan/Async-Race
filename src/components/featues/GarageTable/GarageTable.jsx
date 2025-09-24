@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 import { handleTablesPagesHistory } from 'Storages/SessionStorage';
+import { setRace } from 'store/modules/listReducer';
 
 import FinishLine from 'components/commons/FinishLine/FinishLine';
 import GarageTableRow from 'components/commons/GarageTableRow/GarageTableRow';
@@ -9,6 +11,7 @@ import Pagination from 'components/commons/Pagination/Pagination';
 import styles from './GarageTable.module.scss';
 
 function GarageTable({ list }) {
+   const dispatch = useDispatch();
    const pageInHistory = handleTablesPagesHistory( 'getItem', { key: 'garageTable' } );
    const visibleitemsCount = 7;
    const maxPageCount = Math.ceil( list.length / visibleitemsCount );
@@ -17,7 +20,8 @@ function GarageTable({ list }) {
    const handlePageChange = No => setPageNo( No );
 
    useEffect( () => {
-      handleTablesPagesHistory( 'update', { key: 'garageTable', newValue: pageNo } )
+      handleTablesPagesHistory( 'update', { key: 'garageTable', newValue: pageNo } );
+      dispatch( setRace( false ) );
    }, [ pageNo ]);
 
    return(
