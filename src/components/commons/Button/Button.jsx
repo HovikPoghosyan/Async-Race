@@ -3,17 +3,26 @@ import classnames from 'classnames';
 
 import styles from './Button.module.scss';
 
-function Button({ name, functionality, isDisable = false, style, isActive = false }) {
-
-   return(
+function Button({
+   name,
+   functionality,
+   isDisable = false,
+   style,
+   isActive = false,
+}) {
+   return (
       <button
-         disabled = { isDisable || isActive } 
-         onClick = { functionality }
-         className = { classnames( { [ styles.isActive ]:  isActive }, styles.button, style ) }
+         disabled={isDisable || isActive}
+         onClick={functionality}
+         className={classnames(
+            { [styles.isActive]: isActive },
+            styles.button,
+            style
+         )}
       >
-         { name }
+         {name}
       </button>
-   )
+   );
 }
 
 export default Button;

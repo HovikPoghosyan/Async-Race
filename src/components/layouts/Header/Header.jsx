@@ -7,13 +7,12 @@ import NavBar from 'components/featues/NavBar/NavBar';
 import styles from './Header.module.scss';
 
 function Header() {
-
-   return(
-      <header className = { styles.header }>
+   return (
+      <header className={styles.header}>
          <Logo />
          <NavBar />
       </header>
-   )
+   );
 }
 
 export default Header;

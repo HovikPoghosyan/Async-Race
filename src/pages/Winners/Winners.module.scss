@@ -7,13 +7,13 @@
    -webkit-text-fill-color: transparent;
    background-clip: text;
    color: transparent;
-   font-size: var( --font-size-bigger );   
-   line-height: var( --font-size-bigger );
-   font-weight: var( --font-weight-extra-bold ); 
+   font-size: var(--font-size-bigger);
+   line-height: var(--font-size-bigger);
+   font-weight: var(--font-weight-extra-bold);
    display: inline-flex;
 }
 
 .winnersHead {
    text-align: center;
-   margin: 13px 0; 
+   margin: 13px 0;
 }

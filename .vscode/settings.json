@@ -1,0 +1,25 @@
+{
+   "editor.formatOnSave": true,
+   "editor.defaultFormatter": "rvest.prettier-eslint",
+   "[javascript]": {
+      "editor.defaultFormatter": "rvest.prettier-eslint"
+   },
+   "[javascriptreact]": {
+      "editor.defaultFormatter": "rvest.prettier-eslint"
+   },
+   "[typescript]": {
+      "editor.defaultFormatter": "rvest.prettier-eslint"
+   },
+   "[typescriptreact]": {
+      "editor.defaultFormatter": "rvest.prettier-eslint"
+   },
+   "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+   },
+   "eslint.validate": [
+      "javascript",
+      "javascriptreact",
+      "typescript",
+      "typescriptreact"
+   ]
+}

@@ -15,11 +15,10 @@
    border-bottom: 3px solid $border-color;
    color: $text-color;
    padding: 5px 10px;
-   font-weight: var( --font-weight-bold );
+   font-weight: var(--font-weight-bold);
    line-height: 16px;
-   font-size: var( --font-size-small );
+   font-size: var(--font-size-small);
 }
-
 
 .colorBox {
    outline: none;
@@ -34,8 +33,7 @@
    margin: 0 10px;
 }
 
-
-@media ( max-width: 576px ) {
+@media (max-width: 576px) {
    .colorBox {
       margin: 0 5px;
       height: 20px;

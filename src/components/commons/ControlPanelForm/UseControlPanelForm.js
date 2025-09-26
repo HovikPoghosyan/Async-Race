@@ -6,36 +6,42 @@ import { setSelectedCar } from 'store/modules/listReducer';
 
 function UseControlPanelForm() {
    const dispatch = useDispatch();
-   const selectedCar = useSelector( store => store.list.selectedCar );
-   const [ newCar, setNewCar ] = useState({ name: '', color: '#48bfee' });
-   const [ updatedCar, setUpdatedCar ] = useState({ name: '', color: '#48bfee' });
-   const [ updateBtnDisable, setUpdateBtnDisable ] = useState( true );
-   
+   const selectedCar = useSelector((store) => store.list.selectedCar);
+   const [newCar, setNewCar] = useState({ name: '', color: '#48bfee' });
+   const [updatedCar, setUpdatedCar] = useState({ name: '', color: '#48bfee' });
+   const [updateBtnDisable, setUpdateBtnDisable] = useState(true);
+
    useEffect(() => {
-      if ( !!selectedCar ) setUpdatedCar({ name: selectedCar.name, color: selectedCar.color });
+      if (!!selectedCar)
+         setUpdatedCar({ name: selectedCar.name, color: selectedCar.color });
       else setUpdatedCar({ name: '', color: '#48bfee' });
-   }, [ selectedCar ]);
+   }, [selectedCar]);
 
    const submitNewCar = () => {
-      dispatch( addNewCar( newCar ) );
+      dispatch(addNewCar(newCar));
       setNewCar({ name: '', color: '#48bfee' });
    };
    const submitUpdatedCar = () => {
-      dispatch( updateCar({ ...selectedCar, ...updatedCar }) )
+      dispatch(updateCar({ ...selectedCar, ...updatedCar }));
       setUpdatedCar({ name: '', color: '#48bfee' });
-      dispatch( setSelectedCar( undefined ) );
+      dispatch(setSelectedCar(undefined));
    };
 
-   const handleNewCar = ( newData ) => setNewCar({ ...newCar, ...newData });
-   const handleUpdatedCar = ( newData ) => setUpdatedCar({ ...updatedCar, ...newData });
+   const handleNewCar = (newData) => setNewCar({ ...newCar, ...newData });
+   const handleUpdatedCar = (newData) =>
+      setUpdatedCar({ ...updatedCar, ...newData });
 
    useEffect(() => {
-      if ( selectedCar && ( updatedCar.name !== selectedCar.name || updatedCar.color !== selectedCar.color ) ) {
-         setUpdateBtnDisable( false );
-      } else setUpdateBtnDisable( true );
-   }, [ updatedCar ])
+      if (
+         selectedCar &&
+         (updatedCar.name !== selectedCar.name ||
+            updatedCar.color !== selectedCar.color)
+      ) {
+         setUpdateBtnDisable(false);
+      } else setUpdateBtnDisable(true);
+   }, [updatedCar]);
 
-   return{
+   return {
       newCar,
       updatedCar,
       handleNewCar,
@@ -43,7 +49,7 @@ function UseControlPanelForm() {
       submitNewCar,
       submitUpdatedCar,
       updateBtnDisable,
-   }
+   };
 }
 
 export default UseControlPanelForm;

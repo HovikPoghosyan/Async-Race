@@ -6,13 +6,12 @@ import ControlPanelRightAside from 'components/commons/ControlPanelRightAside/Co
 import styles from './GarageControlPanel.module.scss';
 
 function GarageControlPanel() {
-
-   return(
-      <div className = { styles.panel }>
+   return (
+      <div className={styles.panel}>
          <ControlPanelForm />
          <ControlPanelRightAside />
       </div>
-   )
+   );
 }
 
 export default GarageControlPanel;

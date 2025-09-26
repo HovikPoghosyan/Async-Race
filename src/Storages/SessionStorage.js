@@ -1,63 +1,65 @@
-const handleGarageRaceStatusesHistory = ( action, props ) => {
-  const data = JSON.parse( sessionStorage.getItem( 'garageRaceStatusesHistory' ) || '{}');
+const handleGarageRaceStatusesHistory = (action, props) => {
+   const data = JSON.parse(
+      sessionStorage.getItem('garageRaceStatusesHistory') || '{}'
+   );
 
-  switch ( action ) {
+   switch (action) {
       case 'delete':
-         delete data[ props.key ];
+         delete data[props.key];
          break;
 
       case 'update':
-         if ( props.key != null && props.newValue != null ) {
-         data[ props.key ] = props.newValue;
+         if (props.key != null && props.newValue != null) {
+            data[props.key] = props.newValue;
          }
          break;
 
       case 'add':
-         if ( props.key != null && props.newValue != null ) {
-         data[ props.key ] = props.newValue;
+         if (props.key != null && props.newValue != null) {
+            data[props.key] = props.newValue;
          }
          break;
-      
+
       case 'getItem':
-         return data[ props.key ];
+         return data[props.key];
 
       case 'get':
          return data;
 
       default:
-         console.warn(`Unknown action: ${ action }`);
-  }
+         console.warn(`Unknown action: ${action}`);
+   }
 
-   if ( action != 'get' ) sessionStorage.setItem('garageRaceStatusesHistory', JSON.stringify( data ));
-   else return;
+   if (action != 'get') {
+      sessionStorage.setItem('garageRaceStatusesHistory', JSON.stringify(data));
+   }
 };
 
-const handleTablesPagesHistory = ( action, props ) => {
-  const data = JSON.parse( sessionStorage.getItem( 'tablesPagesHistory' ) || '{}');
+const handleTablesPagesHistory = (action, props) => {
+   const data = JSON.parse(
+      sessionStorage.getItem('tablesPagesHistory') || '{}'
+   );
 
-  switch ( action ) {
+   switch (action) {
       case 'update':
-         if ( props.key != null && props.newValue != null ) {
-            data[ props.key ] = props.newValue;
+         if (props.key != null && props.newValue != null) {
+            data[props.key] = props.newValue;
          }
          break;
-      
+
       case 'getItem':
-         return data[ props.key ];
+         return data[props.key];
 
       case 'get':
          return data;
 
       default:
-         console.warn(`Unknown action: ${ action }`);
-  }
+         console.warn(`Unknown action: ${action}`);
+   }
 
-   if ( action != 'get' ) sessionStorage.setItem('tablesPagesHistory', JSON.stringify( data ));
-   else return;
+   if (action != 'get') {
+      sessionStorage.setItem('tablesPagesHistory', JSON.stringify(data));
+   }
 };
 
-
-export {
-   handleGarageRaceStatusesHistory,
-   handleTablesPagesHistory,
-};
+export { handleGarageRaceStatusesHistory, handleTablesPagesHistory };

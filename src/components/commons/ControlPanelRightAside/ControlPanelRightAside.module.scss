@@ -4,7 +4,7 @@
    display: inline-flex;
    flex-direction: column;
    margin-left: auto;
-   font-size: var( --font-size-bigger );     
+   font-size: var(--font-size-bigger);
 }
 
 .row {
@@ -15,21 +15,18 @@
    height: 30px;
 }
 
-
 .title {
    background: linear-gradient(90deg, $primary-color 10%, $secondary-color 90%);
    -webkit-background-clip: text;
    -webkit-text-fill-color: transparent;
    background-clip: text;
    color: transparent;
-   font-size: var( --font-size-bigger );   
-   font-weight: var( --font-weight-extra-bold );
+   font-size: var(--font-size-bigger);
+   font-weight: var(--font-weight-extra-bold);
 }
 
-
-@media ( max-width: 576px ) {
+@media (max-width: 576px) {
    .row {
       height: 20px;
    }
 }
-

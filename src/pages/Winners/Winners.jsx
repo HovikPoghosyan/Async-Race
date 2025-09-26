@@ -10,24 +10,28 @@ import NotFoundMessage from 'components/commons/NotFoundMessage/NotFoundMessage'
 import styles from './Winners.module.scss';
 
 function Winners() {
-   const { winnersList, loading } = useSelector( state => state.list );
+   const { winnersList, loading } = useSelector((state) => state.list);
 
-   return(
+   return (
       <main>
-         <div className = { styles.winnersHead }>
-            <FontAwesomeIcon size = "2x" color = "rgb(72, 191, 238)" icon = { faTrophy } />
-            <h2 className = { styles.title }>&nbsp;WINNERS&nbsp;</h2>
-            <FontAwesomeIcon size = "2x" color = "#a001ea" icon = { faTrophy } />
+         <div className={styles.winnersHead}>
+            <FontAwesomeIcon
+               size="2x"
+               color="rgb(72, 191, 238)"
+               icon={faTrophy}
+            />
+            <h2 className={styles.title}>&nbsp;WINNERS&nbsp;</h2>
+            <FontAwesomeIcon size="2x" color="#a001ea" icon={faTrophy} />
          </div>
-         {
-            loading 
-               ?  <LoadingCircle />
-               :  winnersList[0] 
-                  ?  <WinnersTable list = { winnersList }/>
-                  :  <NotFoundMessage message = "No winners at the moment. Keep watching!"/>
-         }
+         {loading ? (
+            <LoadingCircle />
+         ) : winnersList[0] ? (
+            <WinnersTable list={winnersList} />
+         ) : (
+            <NotFoundMessage message="No winners at the moment. Keep watching!" />
+         )}
       </main>
-   )
+   );
 }
 
 export default Winners;

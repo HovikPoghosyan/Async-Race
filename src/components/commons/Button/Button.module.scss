@@ -1,10 +1,10 @@
 @import '/src/CONSTANTS/variables';
 
 .button {
-   padding: var( --padding-button );
+   padding: var(--padding-button);
    border-radius: 4px;
-   font-size: var( --font-size-small );
-   font-weight: var( --font-weight-bold );
+   font-size: var(--font-size-small);
+   font-weight: var(--font-weight-bold);
    color: $text-color;
    cursor: pointer;
    background-color: $clickable-box-background-color;
@@ -16,17 +16,17 @@
 }
 
 .button:not(:disabled):hover {
-   transform: Scale( 1.03 );
+   transform: Scale(1.03);
    background-color: #8100bd;
 }
 
 .button:not(:disabled):active {
-   transform: Scale( 0.97 ); 
+   transform: Scale(0.97);
    background-color: #7000a3;
 }
 
 .button:disabled {
-   transform: Scale( 0.97 ); 
+   transform: Scale(0.97);
    background: #1c1a20;
    cursor: not-allowed;
 }
@@ -35,8 +35,7 @@
    border-color: $primary-color;
 }
 
-
-@media ( max-width: 576px ) {
+@media (max-width: 576px) {
    .button {
       border-bottom: none;
    }

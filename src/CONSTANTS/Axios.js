@@ -7,7 +7,7 @@ const URLS = {
    engine: `${API_BASE}/engine`,
 };
 
-const ajax = async ( url, { method = 'get', headers = {}, data = {} } ) => {
+const ajax = async (url, { method = 'get', headers = {}, data = {} }) => {
    try {
       const response = await axios({
          url,
@@ -15,118 +15,134 @@ const ajax = async ( url, { method = 'get', headers = {}, data = {} } ) => {
          data,
          headers,
       });
-      return response.data;
-   } catch ( axiosError ) {
-      console.error('AJAX Error:', axiosError );
+      return response?.data;
+   } catch (axiosError) {
       return {
          isFailed: true,
+         status: axiosError?.status,
          errors: {
-            message: axiosError?.response?.data?.message || axiosError.message || 'Unknown Error',
-            list: axiosError?.response?.data?.errors ? { ...axiosError.response.data.errors } : null,
+            message:
+               axiosError?.response?.data?.message ||
+               axiosError.message ||
+               'Unknown Error',
+            list: axiosError?.response?.data?.errors
+               ? { ...axiosError.response.data.errors }
+               : null,
          },
       };
    }
 };
 
-const fetchGarageList = async() => {
-   const data = await ajax( URLS.garage, {
+const fetchGarageList = async () => {
+   const data = await ajax(URLS.garage, {
       method: 'GET',
-      headers: { },
-      data: { }
-   } );
+      headers: {},
+      data: {},
+   });
 
    return data;
 };
 
-const fetchWinnersList = async() => {
-   const data = await ajax( URLS.winners, {
+const fetchWinnersList = async () => {
+   const data = await ajax(URLS.winners, {
       method: 'GET',
-      headers: { },
-      data: { }
-   } );
+      headers: {},
+      data: {},
+   });
 
    return data;
 };
 
-const fetchNewCar = async( carData ) => {
-   const data = await ajax( URLS.garage, {
+const fetchNewCar = async (carData) => {
+   const data = await ajax(URLS.garage, {
       method: 'POST',
-      headers: { 
+      headers: {
          'Content-Type': 'application/json',
       },
-      data: { ...carData }
-   } );
+      data: { ...carData },
+   });
 
    return data;
 };
 
-const fetchDeleteCar = async( id ) => {
-   const data = await ajax( `${ URLS.garage }/${ id }`, {
+const fetchDeleteCar = async (id) => {
+   const data = await ajax(`${URLS.garage}/${id}`, {
       method: 'DELETE',
-      headers: { },
-      data: { }
-   } );
+      headers: {},
+      data: {},
+   });
 
    return data;
 };
 
-const fetchUpdateCar = async( carData ) => {
-   const data = await ajax( `${ URLS.garage }/${ carData.id }`, {
+const fetchUpdateCar = async (carData) => {
+   const data = await ajax(`${URLS.garage}/${carData.id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      data: { ...carData }
-   } );
+      data: { ...carData },
+   });
 
    return data;
 };
 
-const fetchCarDrive = async( id, status ) => {
+const fetchCarEngineMode = async (id, status) => {
    const queryParams = new URLSearchParams({ id, status });
-   const data = await ajax( `${ URLS.engine }?${ queryParams.toString() }`, {
+   const data = await ajax(`${URLS.engine}?${queryParams.toString()}`, {
       method: 'PATCH',
-      headers: { },
-      data: { }
-   } );
+      headers: {},
+      data: {},
+   });
 
    return data;
-}
+};
 
-const fetchNewWinner = async( carData ) => {
-   const data = await ajax( URLS.winners, {
+const fetchNewWinner = async (carData) => {
+   const data = await ajax(URLS.winners, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      data: { 
+      data: {
          id: carData.id,
          wins: 1,
          time: carData.time,
-      }
-   } );
+      },
+   });
 
    return data;
-}
+};
 
-const fetchDeleteWinner = async( id ) => {
-   const data = await ajax( `${ URLS.winners }/${ id }`, {
+const fetchDeleteWinner = async (id) => {
+   const data = await ajax(`${URLS.winners}/${id}`, {
       method: 'DELETE',
-      headers: { },
-      data: { }
-   } );
+      headers: {},
+      data: {},
+   });
 
    return data;
-}
+};
 
-const fetchUpdateWinner = async( carData ) => {
-   const data = await ajax( `${ URLS.winners }/${ carData.id }`, {
+const fetchUpdateWinner = async (carData) => {
+   const data = await ajax(`${URLS.winners}/${carData.id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      data: { 
+      data: {
          wins: carData.wins + 1,
          time: carData.time,
-      }
-   } );
+      },
+   });
 
    return data;
-}
+};
+
+const fetchCarDrive = async (id) => {
+   const queryParams = new URLSearchParams({ id, status: 'drive' });
+   const data = await ajax(`${URLS.engine}?${queryParams.toString()}`, {
+      method: 'PATCH',
+      headers: {},
+      data: {},
+   });
+
+   return data;
+};
 
 export {
    fetchDeleteWinner,
@@ -135,8 +151,9 @@ export {
    fetchUpdateCar,
    fetchDeleteCar,
    fetchNewCar,
-   fetchCarDrive,
+   fetchCarEngineMode,
    fetchNewWinner,
    fetchUpdateWinner,
+   fetchCarDrive,
 };
 export default ajax;

@@ -8,20 +8,27 @@ import Pagination from 'components/commons/Pagination/Pagination';
 import styles from './WinnersTable.module.scss';
 
 function WinnersTable({ list }) {
-   const pageInHistory = handleTablesPagesHistory( 'getItem', { key: 'winnersTable' } );
+   const pageInHistory = handleTablesPagesHistory('getItem', {
+      key: 'winnersTable',
+   });
    const visibleitemsCount = 10;
-   const maxPageCount = Math.ceil( list.length / visibleitemsCount );
-   const [ pageNo, setPageNo ] = useState( pageInHistory <= maxPageCount ? pageInHistory : maxPageCount ); 
+   const maxPageCount = Math.ceil(list.length / visibleitemsCount);
+   const [pageNo, setPageNo] = useState(
+      pageInHistory <= maxPageCount ? pageInHistory : maxPageCount
+   );
 
-   useEffect( () => {
-      handleTablesPagesHistory( 'update', { key: 'winnersTable', newValue: pageNo } )
-   }, [ pageNo ]);
-   const handlePageChange = No => setPageNo( No );
-   return(
+   useEffect(() => {
+      handleTablesPagesHistory('update', {
+         key: 'winnersTable',
+         newValue: pageNo,
+      });
+   }, [pageNo]);
+   const handlePageChange = (No) => setPageNo(No);
+   return (
       <>
-         <table className = { styles.table } >
+         <table className={styles.table}>
             <thead>
-               <tr> 
+               <tr>
                   <th>No</th>
                   <th>Car</th>
                   <th>Name</th>
@@ -30,27 +37,26 @@ function WinnersTable({ list }) {
                </tr>
             </thead>
             <tbody>
-               {
-                  list
-                  .slice(( pageNo - 1 ) * visibleitemsCount, pageNo * visibleitemsCount )
-                  .map( car => <WinnersTableRow key = { car?.id } carData = { car } /> )
-
-               }
+               {list
+                  .slice(
+                     (pageNo - 1) * visibleitemsCount,
+                     pageNo * visibleitemsCount
+                  )
+                  .map((car) => (
+                     <WinnersTableRow key={car?.id} carData={car} />
+                  ))}
             </tbody>
          </table>
-         {
-            list.length >= visibleitemsCount 
-               ?  <Pagination 
-                     count = { list.length } 
-                     pageNo = { pageNo }
-                     changePage = { ( No ) => handlePageChange( No ) }
-                     visibleitemsCount = { visibleitemsCount }
-                  /> 
-               :  null
-         }
+         {list.length >= visibleitemsCount ? (
+            <Pagination
+               count={list.length}
+               pageNo={pageNo}
+               changePage={(No) => handlePageChange(No)}
+               visibleitemsCount={visibleitemsCount}
+            />
+         ) : null}
       </>
-
-   )
+   );
 }
 
 export default WinnersTable;

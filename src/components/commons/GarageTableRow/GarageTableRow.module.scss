@@ -5,7 +5,11 @@
    border-bottom: 2px solid transparent;
    border-image-slice: 1;
    padding-bottom: 10px;
-   border-image-source: linear-gradient(90deg, $primary-color 10%, $secondary-color 90%);
+   border-image-source: linear-gradient(
+      90deg,
+      $primary-color 10%,
+      $secondary-color 90%
+   );
    display: flex;
    &:last-child {
       border-bottom: none;
@@ -35,12 +39,12 @@
       margin-left: 0;
    }
    100% {
-      margin-left: calc( 100% - 100px);
+      margin-left: calc(100% - 100px);
    }
 }
 
 .inTheEnd {
-   margin-left: calc( 100% - 100px);
+   margin-left: calc(100% - 100px);
 }
 
 .controlBlock {
@@ -77,13 +81,12 @@
    position: absolute;
    right: 40px;
    line-height: 30px;
-   font-size: var( --font-size-big );
-   font-weight: var( --font-weight-extra-bold );
+   font-size: var(--font-size-big);
+   font-weight: var(--font-weight-extra-bold);
    color: $text-color;
 }
 
-
-@media ( max-width: 576px ) {
+@media (max-width: 576px) {
    .controlBlock {
       border: none;
       padding: 0;
