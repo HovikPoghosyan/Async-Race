@@ -14,20 +14,22 @@
    border-left: 0;
    border-right: 0;
    border-image-slice: 1;
-   border-image-source: linear-gradient(90deg,$primary-color 10%, $secondary-color 90%);
+   border-image-source: linear-gradient(
+      90deg,
+      $primary-color 10%,
+      $secondary-color 90%
+   );
    display: grid;
    gap: 10px;
 }
 
 .startLine {
    position: absolute;
-   writing-mode: vertical-rl; 
+   writing-mode: vertical-rl;
    text-orientation: upright;
    height: 100%;
    text-align: center;
-   font-size: var( --font-size-bigger );
-   letter-spacing: 10px;
-   font-weight: var( --font-weight-extra-bold );
+   font-weight: var(--font-weight-extra-bold);
    z-index: 2;
    left: 133px;
    background-color: #13151f;
@@ -37,13 +39,12 @@
    border-bottom: none;
 }
 
-
-@media ( max-width: 992px ) {
+@media (max-width: 992px) {
    .startLine {
       left: 123px;
    }
 }
-@media ( max-width: 768px ) {
+@media (max-width: 768px) {
    .startLine {
       border-width: 2px;
    }
@@ -52,7 +53,7 @@
    }
 }
 
-@media ( max-width: 576px ) {
+@media (max-width: 576px) {
    .startLine {
       left: 115px;
       border-width: 1px;

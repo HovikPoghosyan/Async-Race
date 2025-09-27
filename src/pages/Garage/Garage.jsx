@@ -9,20 +9,20 @@ import NotFoundMessage from 'components/commons/NotFoundMessage/NotFoundMessage'
 import styles from './Garage.module.scss';
 
 function Garage() {
-   const { garageList, loading } = useSelector( state => state.list );
-   
-   return(
+   const { garageList, loading } = useSelector((state) => state.list);
+
+   return (
       <main>
          <GarageControlPanel />
-         {
-            loading
-               ?  <LoadingCircle />
-               :  garageList.length
-                     ?  <GarageTable list = { garageList }/>
-                     :  <NotFoundMessage message = "No cars yet. Add one to get started!"/>
-         }
+         {loading ? (
+            <LoadingCircle />
+         ) : garageList.length ? (
+            <GarageTable list={garageList} />
+         ) : (
+            <NotFoundMessage message="No cars yet. Add one to get started!" />
+         )}
       </main>
-   )
-} 
+   );
+}
 
 export default Garage;

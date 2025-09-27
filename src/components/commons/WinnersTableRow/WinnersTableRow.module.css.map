@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "WinnersTableRow.module.scss"
+    ],
+    "names": [],
+    "file": "WinnersTableRow.module.css"
+}

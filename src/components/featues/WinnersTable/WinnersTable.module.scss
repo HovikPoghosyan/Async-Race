@@ -3,10 +3,10 @@
 .table {
    width: 100%;
    height: 100%;
-   font-size: var( --font-size-big ); 
+   font-size: var(--font-size-big);
    padding: 5px;
    border-spacing: 0;
-   border-radius: 15px;          
+   border-radius: 15px;
    background: linear-gradient(90deg, $primary-color 10%, $secondary-color 90%);
    color: $text-color;
    margin-top: 10px;
@@ -14,8 +14,8 @@
    th {
       color: #fff;
       padding: 2px;
-      font-size: var( --font-size-bigger );
-      font-weight: var( --font-weight-bold );
+      font-size: var(--font-size-bigger);
+      font-weight: var(--font-weight-bold);
       padding: 12px 16px;
       border-bottom: 4px solid $border-color;
       background: #13151f;
@@ -38,7 +38,7 @@
       border-bottom: 4px solid $border-color;
       border-right: 4px solid $border-color;
    }
-   
+
    td:last-child {
       border-right: none;
    }
@@ -62,8 +62,7 @@
    }
 }
 
-
-@media ( max-width: 992 ) {
+@media (max-width: 992) {
    .table {
       padding: 4px;
       th {
@@ -76,7 +75,7 @@
    }
 }
 
-@media ( max-width: 768px ) {
+@media (max-width: 768px) {
    .table {
       padding: 3px;
       th {
@@ -89,7 +88,7 @@
    }
 }
 
-@media ( max-width: 576px ) {
+@media (max-width: 576px) {
    .table {
       th {
          padding: 12px 4px;

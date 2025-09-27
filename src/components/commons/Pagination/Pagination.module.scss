@@ -5,7 +5,7 @@
    display: flex;
    flex-direction: row;
    justify-content: space-evenly;
-   font-size: var( --font-size-big );
-   font-weight: var( --font-weight-extra-bold );
+   font-size: var(--font-size-big);
+   font-weight: var(--font-weight-extra-bold);
    color: $text-color;
 }

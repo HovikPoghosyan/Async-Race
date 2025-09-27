@@ -1,18 +1,24 @@
 import React from 'react';
 
-function CarIcon({ width = 100, height = 100, fill = "#ccc", className, style, handleAnimationEnd }) {
-
+function CarIcon({
+   width = 100,
+   height = 100,
+   fill = '#ccc',
+   className,
+   style,
+   handleAnimationEnd,
+}) {
    return (
       <svg
          xmlns="http://www.w3.org/2000/svg"
-         width={ width }
-         height={ height }
+         width={width}
+         height={height}
          viewBox="0 0 512.000000 212.000000"
          preserveAspectRatio="xMidYMid meet"
-         fill={ fill }
-         className={ className }
-         style={ style } 
-         onAnimationEnd={ handleAnimationEnd }
+         fill={fill}
+         className={className}
+         style={style}
+         onAnimationEnd={handleAnimationEnd}
       >
          <g
             transform="translate(0.000000,212.000000) scale(0.100000,-0.100000)"
@@ -41,7 +47,7 @@ function CarIcon({ width = 100, height = 100, fill = "#ccc", className, style, h
             <path d="M3910 529 c-26 -55 -21 -69 28 -69 20 0 22 4 22 60 0 76 -18 79 -50 9z" />
          </g>
       </svg>
-   )
+   );
 }
 
 export default CarIcon;

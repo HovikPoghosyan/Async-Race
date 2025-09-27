@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,MAAM,CAAC;EACJ,OAAO,EAAE,IAAI;EACb,cAAc,EAAE,GAAG;EACnB,UAAU,EAAE,IAAI;CAClB",
+    "sources": [
+        "GarageControlPanel.module.scss"
+    ],
+    "names": [],
+    "file": "GarageControlPanel.module.css"
+}

@@ -5,17 +5,18 @@ import classNames from 'classnames';
 import styles from './NavButton.module.scss';
 
 function NavButton({ link, name }) {
-
-   return(
+   return (
       <li>
          <NavLink
-            to = { link.toLowerCase() }
-            className = {({ isActive }) => classNames( styles.navButton, { [ styles.isActive ]: isActive })}
+            to={link.toLowerCase()}
+            className={({ isActive }) =>
+               classNames(styles.navButton, { [styles.isActive]: isActive })
+            }
          >
-            { name }
+            {name}
          </NavLink>
       </li>
-   )
+   );
 }
 
 export default NavButton;
