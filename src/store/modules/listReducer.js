@@ -26,8 +26,6 @@ const generateCars = createAsyncThunk(
       }
 
       dispatch(getGarageLists()).unwrap();
-
-      return;
    }
 );
 

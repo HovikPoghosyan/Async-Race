@@ -23,9 +23,6 @@ function UseGarageTableRow(carData) {
       handleGarageRaceStatusesHistory('getItem', { key: id }) || 'stopped'
    );
    const animationStyle = {
-      // animation: `${ styles.moveToEnd } ${ time }s linear 4.2s forwards`,
-      // animationPlayState: raceStatus == 'brokenEngine' ? "paused" : "running",
-
       animationName: styles.moveToEnd,
       animationDuration: `${time}s`,
       animationTimingFunction: 'linear',

@@ -39,7 +39,7 @@ function GarageTableRow({ carData }) {
                icon={raceStatus == 'brokenEngine' ? faTriangleExclamation : ''}
                color="#dc3545"
             />
-            {' ' + name}
+            {` ${name}`}
          </h4>
          <StartLight raceState={raceStatus == 'started'} />
          <div className={styles.controlBlock}>

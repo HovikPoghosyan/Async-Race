@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { addNewCar, updateCar } from 'store/modules/listReducer';
-import { setSelectedCar } from 'store/modules/listReducer';
+import {
+   addNewCar,
+   updateCar,
+   setSelectedCar,
+} from 'store/modules/listReducer';
 
 function UseControlPanelForm() {
    const dispatch = useDispatch();
@@ -12,7 +15,7 @@ function UseControlPanelForm() {
    const [updateBtnDisable, setUpdateBtnDisable] = useState(true);
 
    useEffect(() => {
-      if (!!selectedCar)
+      if (selectedCar)
          setUpdatedCar({ name: selectedCar.name, color: selectedCar.color });
       else setUpdatedCar({ name: '', color: '#48bfee' });
    }, [selectedCar]);
