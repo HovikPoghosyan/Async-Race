@@ -12,6 +12,7 @@ module.exports = {
     "prettier"
   ],
   rules: {
+    // "max-lines-per-function": ['error', { max: 40, skipComments: true, skipBlankLines: true }],
     "import/no-unresolved": "off",
     "no-unused-vars": "off",
     "no-plusplus": "off",
@@ -28,6 +29,19 @@ module.exports = {
     "no-shadow": "off",
     "no-unused-expressions": "off",
     "no-unsafe-optional-chaining": "off",
+    'no-undef': 'off',
+    'react/require-default-props': 'off',
+    'no-restricted-globals': 'off',
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "ts": "never",
+        "tsx": "never",
+        "js": "never",
+        "jsx": "never",
+      }
+    ]
   },
   plugins: ["react", "react-hooks", "import", "jsx-a11y", "prettier"],
   parserOptions: {
@@ -38,7 +52,7 @@ module.exports = {
   settings: {
     react: { version: "detect" },
     "import/resolver": {
-      node: { extensions: [".js", ".jsx"] },
+      node: { extensions: [".js", ".jsx", ".ts", ".tsx"] },
     },
   },
 };
