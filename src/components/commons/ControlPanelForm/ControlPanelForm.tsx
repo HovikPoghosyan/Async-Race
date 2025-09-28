@@ -6,15 +6,8 @@ import UseControlPanelForm from './UseControlPanelForm';
 import styles from './ControlPanelForm.module.scss';
 
 function ControlPanelForm() {
-   const {
-      newCar,
-      updatedCar,
-      handleNewCar,
-      handleUpdatedCar,
-      submitNewCar,
-      submitUpdatedCar,
-      updateBtnDisable,
-   } = UseControlPanelForm();
+   const { newCar, updatedCar, handleNewCar, handleUpdatedCar, submitNewCar, submitUpdatedCar, updateBtnDisable } =
+      UseControlPanelForm();
 
    return (
       <form className={styles.form}>

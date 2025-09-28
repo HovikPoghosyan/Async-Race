@@ -14,21 +14,11 @@ function ControlPanelRightAside() {
    return (
       <aside className={styles.aside}>
          <div className={styles.row}>
-            <h2
-               className={styles.title}
-            >{`GARAGE (count: ${garageList.length})`}</h2>
+            <h2 className={styles.title}>{`GARAGE (count: ${garageList.length})`}</h2>
          </div>
          <div className={styles.row}>
-            <Button
-               name="Race"
-               isDisable={!!(loading || !!race)}
-               functionality={() => dispatch(setRace('started'))}
-            />
-            <Button
-               name="Reset"
-               isDisable={!!(loading || !race)}
-               functionality={() => dispatch(setRace(false))}
-            />
+            <Button name="Race" isDisable={!!(loading || !!race)} functionality={() => dispatch(setRace('started'))} />
+            <Button name="Reset" isDisable={!!(loading || !race)} functionality={() => dispatch(setRace(false))} />
             <Button
                name="Generate Car"
                isDisable={!!(loading || race)}

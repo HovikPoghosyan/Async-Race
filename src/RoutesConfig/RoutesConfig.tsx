@@ -9,7 +9,7 @@ function routesConfig(): ReturnType<typeof createBrowserRouter> {
    const routes: RouteObject[] = [
       {
          path: '/Async-Race',
-         element: <App/>,
+         element: <App />,
          children: [
             {
                index: true,
@@ -17,17 +17,17 @@ function routesConfig(): ReturnType<typeof createBrowserRouter> {
             },
             {
                path: 'garage',
-               element: <Garage/>,
+               element: <Garage />,
             },
             {
                path: 'winners',
-               element: <Winners/>,
+               element: <Winners />,
             },
-         ]
+         ],
       },
    ];
 
-   return createBrowserRouter( routes );
+   return createBrowserRouter(routes);
 }
 
 export default routesConfig;

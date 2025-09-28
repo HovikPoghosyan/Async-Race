@@ -4,29 +4,19 @@ import classnames from 'classnames';
 import styles from './Button.module.scss';
 
 interface ButtonProps {
-  name?: React.ReactNode;
-  functionality?: MouseEventHandler<HTMLButtonElement>;
-  isDisable?: boolean;
-  style?: CSSProperties | string;
-  isActive?: boolean;
+   name?: React.ReactNode;
+   functionality?: MouseEventHandler<HTMLButtonElement>;
+   isDisable?: boolean;
+   style?: CSSProperties | string;
+   isActive?: boolean;
 }
 
-function Button ({ 
-   name, 
-   functionality, 
-   isDisable = false, 
-   style, 
-   isActive = false,
-}: ButtonProps) {
+function Button({ name, functionality, isDisable = false, style, isActive = false }: ButtonProps) {
    return (
       <button
          disabled={isDisable || isActive}
          onClick={functionality}
-         className={classnames(
-            { [styles.isActive]: isActive },
-            styles.button,
-            style
-         )}
+         className={classnames({ [styles.isActive]: isActive }, styles.button, style)}
       >
          {name}
       </button>

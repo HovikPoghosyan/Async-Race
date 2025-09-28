@@ -14,11 +14,7 @@
    border-left: 0;
    border-right: 0;
    border-image-slice: 1;
-   border-image-source: linear-gradient(
-      90deg,
-      $primary-color 10%,
-      $secondary-color 90%
-   );
+   border-image-source: linear-gradient(90deg, $primary-color 10%, $secondary-color 90%);
    display: grid;
    gap: 10px;
 }

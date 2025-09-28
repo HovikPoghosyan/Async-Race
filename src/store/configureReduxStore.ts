@@ -13,11 +13,9 @@ function configureReduxStore() {
    return store;
 }
 
-
 type AppStore = ReturnType<typeof configureReduxStore>;
-type RootState = ReturnType<AppStore["getState"]>;
-type AppDispatch = AppStore["dispatch"];
-
+type RootState = ReturnType<AppStore['getState']>;
+type AppDispatch = AppStore['dispatch'];
 
 export { type RootState, type AppDispatch };
 export default configureReduxStore;

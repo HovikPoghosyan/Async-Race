@@ -14,36 +14,28 @@ interface GarageTableProps {
    list: Car[];
 }
 
+const getStartLineStyle = (height: number) => ({
+   fontSize: `${Math.min((height / 100) * 10, 24)}px`,
+   letterSpacing: `${Math.min((height / 100) * 2, 10)}px`,
+});
+
 function GarageTable({ list }: GarageTableProps) {
    const dispatch = useAppDispatch();
-   const pageInHistory = handleTablesPagesHistory('getItem', {
-      key: 'garageTable',
-   });
+   const pageInHistory = handleTablesPagesHistory('getItem', { key: 'garageTable' });
    const visibleitemsCount = 7;
    const maxPageCount = Math.ceil(list.length / visibleitemsCount);
-   const [pageNo, setPageNo] = useState<number>(
-      pageInHistory <= maxPageCount ? pageInHistory : maxPageCount
-   );
+   const [pageNo, setPageNo] = useState<number>(pageInHistory <= maxPageCount ? pageInHistory : maxPageCount);
    const tableRef = useRef<HTMLDivElement>(null);
    const [startLineStyle, setStartLineStyle] = useState<CSSProperties>({});
    const handlePageChange = (No: number) => setPageNo(No);
-
    useEffect(() => {
-      handleTablesPagesHistory('update', {
-         key: 'garageTable',
-         newValue: pageNo,
-      });
+      handleTablesPagesHistory('update', { key: 'garageTable', newValue: pageNo });
       dispatch(setRace(false));
    }, [pageNo]);
-
    useEffect(() => {
       const tableHeight: number = tableRef?.current?.offsetHeight ?? 50;
-      setStartLineStyle({
-         fontSize: `${Math.min((tableHeight / 100) * 10, 24)}px`,
-         letterSpacing: `${Math.min((tableHeight / 100) * 2, 10)}px`,
-      });
+      setStartLineStyle(getStartLineStyle(tableHeight));
    }, []);
-
    return (
       <div className={styles.garageTable} ref={tableRef}>
          <div className={styles.track}>
@@ -51,13 +43,8 @@ function GarageTable({ list }: GarageTableProps) {
                START
             </span>
             <FinishLine />
-            {list
-               .slice(
-                  (pageNo - 1) * visibleitemsCount,
-                  pageNo * visibleitemsCount
-               )
-               .map((car) => (
-                  <GarageTableRow key={car.id} carData={car} />
+            {list.slice((pageNo - 1) * visibleitemsCount, pageNo * visibleitemsCount).map((car) => (
+               <GarageTableRow key={car.id} carData={car} />
             ))}
          </div>
          {list.length > visibleitemsCount ? (

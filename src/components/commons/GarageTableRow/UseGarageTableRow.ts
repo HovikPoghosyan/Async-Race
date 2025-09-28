@@ -1,17 +1,11 @@
-import React, { FC,useState, useEffect, CSSProperties } from 'react';
+import React, { FC, useState, useEffect, CSSProperties } from 'react';
 import { useAppDispatch, useAppSelector } from 'store/hooks/hooks';
 
 import { handleGarageRaceStatusesHistory } from 'Storages/SessionStorage';
 import { fetchCarEngineMode, fetchCarDrive } from 'CONSTANTS/Axios';
-import {
-   deleteCar,
-   newWinner,
-   setSelectedCar,
-   updateWinner,
-} from 'store/modules/listReducer';
+import { deleteCar, newWinner, setSelectedCar, updateWinner } from 'store/modules/listReducer';
 
 import styles from './GarageTableRow.module.scss';
-
 
 interface CarData {
    id: number;
@@ -29,32 +23,29 @@ interface UseGarageTableRowReturn {
    raceStatus: RaceStatus;
    animationStyle: CSSProperties;
    handleFinish: () => void;
-};
+}
+
+const getAnimationStyle = (raceStatus: string, time: number): CSSProperties => ({
+   animationName: styles.moveToEnd,
+   animationDuration: `${time}s`,
+   animationTimingFunction: 'linear',
+   animationDelay: '4.2s',
+   animationFillMode: 'forwards',
+   animationPlayState: raceStatus === 'brokenEngine' ? 'paused' : 'running',
+});
 
 function UseGarageTableRow(carData: CarData): UseGarageTableRowReturn {
    const dispatch = useAppDispatch();
    const { id } = carData;
-   const { selectedCar, race, winner, winnersList } = useAppSelector(
-      (store) => store.list
-   );
+   const { selectedCar, race, winner, winnersList } = useAppSelector((store) => store.list);
    const [time, setTime] = useState<number>(0);
    const [raceStatus, setRaceStatus] = useState<RaceStatus>(
       (handleGarageRaceStatusesHistory('getItem', { key: id }) as RaceStatus) || 'stopped'
    );
-   const animationStyle: CSSProperties = {
-      animationName: styles.moveToEnd,
-      animationDuration: `${time}s`,
-      animationTimingFunction: 'linear',
-      animationDelay: '4.2s',
-      animationFillMode: 'forwards',
-      animationPlayState: raceStatus === 'brokenEngine' ? 'paused' : 'running',
-   };
+   const animationStyle: CSSProperties = getAnimationStyle(raceStatus, time);
    useEffect(() => {
-      if ( raceStatus !== 'started' ) {
-         handleGarageRaceStatusesHistory('update', {
-            key: id,
-            newValue: raceStatus,
-         });
+      if (raceStatus !== 'started') {
+         handleGarageRaceStatusesHistory('update', { key: id, newValue: raceStatus });
       }
    }, [raceStatus]);
 
@@ -85,9 +76,8 @@ function UseGarageTableRow(carData: CarData): UseGarageTableRowReturn {
       fetchCarEngineMode(id, 'stopped');
       setRaceStatus('stopped');
    };
-   const toggleSelect = () =>
-      dispatch(setSelectedCar(selectedCar?.id == id ? undefined : carData));
-   const handleDelete = () => dispatch(deleteCar( id ));
+   const toggleSelect = () => dispatch(setSelectedCar(selectedCar?.id == id ? undefined : carData));
+   const handleDelete = () => dispatch(deleteCar(id));
    const handleFinish = () => {
       if (race && !winner) {
          const lastWin = winnersList.find((car) => car.id === id);
@@ -96,7 +86,7 @@ function UseGarageTableRow(carData: CarData): UseGarageTableRowReturn {
             dispatch(
                updateWinner({
                   ...lastWin,
-                  time: Math.min(lastWin.time, timeNewValue ),
+                  time: Math.min(lastWin.time, timeNewValue),
                })
             );
          else dispatch(newWinner({ ...carData, time: timeNewValue }));
@@ -108,15 +98,7 @@ function UseGarageTableRow(carData: CarData): UseGarageTableRowReturn {
       if (race && race != 'finished') race === 'started' ? handleStart() : handleStop();
    }, [race]);
 
-   return {
-      handleStart,
-      handleStop,
-      toggleSelect,
-      handleDelete,
-      raceStatus,
-      animationStyle,
-      handleFinish,
-   };
+   return { handleStart, handleStop, toggleSelect, handleDelete, raceStatus, animationStyle, handleFinish };
 }
 
 export default UseGarageTableRow;

@@ -11,18 +11,7 @@ const CARMARKS = [
    'Toyota',
 ];
 
-const CARMODELS = [
-   'GT',
-   'M',
-   'AMG',
-   'COUPE',
-   'R',
-   'BRABUS',
-   'ALPINA',
-   'HENNESSEY',
-   'TRD',
-   'SHELBY',
-];
+const CARMODELS = ['GT', 'M', 'AMG', 'COUPE', 'R', 'BRABUS', 'ALPINA', 'HENNESSEY', 'TRD', 'SHELBY'];
 
 function getRandomColor() {
    const letters = '0123456789ABCDEF';

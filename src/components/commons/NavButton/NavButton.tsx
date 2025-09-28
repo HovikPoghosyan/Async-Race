@@ -5,8 +5,8 @@ import classNames from 'classnames';
 import styles from './NavButton.module.scss';
 
 interface NavButtonProps {
-  link: string;
-  name: string;
+   link: string;
+   name: string;
 }
 
 function NavButton({ link, name }: NavButtonProps) {
@@ -14,9 +14,7 @@ function NavButton({ link, name }: NavButtonProps) {
       <li>
          <NavLink
             to={link.toLowerCase()}
-            className={({ isActive }) =>
-               classNames(styles.navButton, { [styles.isActive]: isActive })
-            }
+            className={({ isActive }) => classNames(styles.navButton, { [styles.isActive]: isActive })}
          >
             {name}
          </NavLink>

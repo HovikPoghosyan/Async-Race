@@ -16,11 +16,7 @@ function Winners() {
    return (
       <main>
          <div className={styles.winnersHead}>
-            <FontAwesomeIcon
-               size="2x"
-               color="rgb(72, 191, 238)"
-               icon={faTrophy}
-            />
+            <FontAwesomeIcon size="2x" color="rgb(72, 191, 238)" icon={faTrophy} />
             <h2 className={styles.title}>&nbsp;WINNERS&nbsp;</h2>
             <FontAwesomeIcon size="2x" color="#a001ea" icon={faTrophy} />
          </div>

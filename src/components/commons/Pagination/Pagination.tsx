@@ -28,10 +28,10 @@ function Pagination({ count, pageNo, changePage, visibleitemsCount }: Pagination
                   <FontAwesomeIcon icon={faArrowLeft} /> Previous Page
                </span>
             }
-            isDisable={ pageNo === 1 || ( pathname === '/Async-Race/garage' ? race == 'started' : false ) }
+            isDisable={pageNo === 1 || (pathname === '/Async-Race/garage' ? race == 'started' : false)}
             functionality={() => {
                changePage(pageNo - 1);
-               if( pathname === '/Async-Race/garage' ) dispatch( setRace('stopped'))
+               if (pathname === '/Async-Race/garage') dispatch(setRace('stopped'));
             }}
          />
          <p>{`Page No.${pageNo}`}</p>
@@ -41,10 +41,13 @@ function Pagination({ count, pageNo, changePage, visibleitemsCount }: Pagination
                   Next Page <FontAwesomeIcon icon={faArrowRight} />
                </span>
             }
-            isDisable={ pageNo == Math.ceil(count / visibleitemsCount) ||( pathname == '/Async-Race/garage' ? race == 'started' : false )}
+            isDisable={
+               pageNo == Math.ceil(count / visibleitemsCount) ||
+               (pathname == '/Async-Race/garage' ? race == 'started' : false)
+            }
             functionality={() => {
                changePage(pageNo + 1);
-               if( pathname === '/Async-Race/garage' ) dispatch( setRace('stopped'))
+               if (pathname === '/Async-Race/garage') dispatch(setRace('stopped'));
             }}
          />
       </div>

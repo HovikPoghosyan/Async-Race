@@ -1,14 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'store/hooks/hooks';
 
-import {
-   addNewCar,
-   updateCar,
-   setSelectedCar,
-   Car,
-   CarData,
-} from 'store/modules/listReducer';
-
+import { addNewCar, updateCar, setSelectedCar, Car, CarData } from 'store/modules/listReducer';
 
 interface UseControlPanelFormReturn {
    newCar: CarData;
@@ -28,8 +21,7 @@ function UseControlPanelForm(): UseControlPanelFormReturn {
    const [updateBtnDisable, setUpdateBtnDisable] = useState(true);
 
    useEffect(() => {
-      if (selectedCar)
-         setUpdatedCar({ name: selectedCar.name, color: selectedCar.color, id: selectedCar.id });
+      if (selectedCar) setUpdatedCar({ name: selectedCar.name, color: selectedCar.color, id: selectedCar.id });
       else setUpdatedCar({ name: '', color: '#48bfee', id: 0 });
    }, [selectedCar]);
 
@@ -45,27 +37,14 @@ function UseControlPanelForm(): UseControlPanelFormReturn {
    };
 
    const handleNewCar = (newData: Partial<CarData>) => setNewCar({ ...newCar, ...newData });
-   const handleUpdatedCar = (newData: Partial<Car>) =>
-      setUpdatedCar({ ...updatedCar, ...newData });
+   const handleUpdatedCar = (newData: Partial<Car>) => setUpdatedCar({ ...updatedCar, ...newData });
    useEffect(() => {
-      if (
-         selectedCar &&
-         (updatedCar.name !== selectedCar.name ||
-            updatedCar.color !== selectedCar.color)
-      ) {
+      if (selectedCar && (updatedCar.name !== selectedCar.name || updatedCar.color !== selectedCar.color)) {
          setUpdateBtnDisable(false);
       } else setUpdateBtnDisable(true);
    }, [updatedCar]);
 
-   return {
-      newCar: newCar as Car,
-      updatedCar,
-      handleNewCar,
-      handleUpdatedCar,
-      submitNewCar,
-      submitUpdatedCar,
-      updateBtnDisable,
-   };
+   return { newCar, updatedCar, handleNewCar, handleUpdatedCar, submitNewCar, submitUpdatedCar, updateBtnDisable };
 }
 
 export default UseControlPanelForm;

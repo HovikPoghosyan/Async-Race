@@ -9,10 +9,8 @@ interface StartLightProps {
 
 function StartLight({ raceState }: StartLightProps) {
    const [lightState, setLightState] = useState(0);
-
    useEffect(() => {
       let setLightStateTimer: ReturnType<typeof setTimeout>;
-
       if (raceState) {
          if (lightState < 4) {
             setLightStateTimer = setTimeout(() => {
@@ -22,7 +20,6 @@ function StartLight({ raceState }: StartLightProps) {
       } else {
          setLightState(0);
       }
-
       return () => clearTimeout(setLightStateTimer);
    }, [raceState, lightState]);
 

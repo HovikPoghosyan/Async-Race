@@ -21,13 +21,8 @@ const ajax = async (url, { method = 'get', headers = {}, data = {} }) => {
          isFailed: true,
          status: axiosError?.status,
          errors: {
-            message:
-               axiosError?.response?.data?.message ||
-               axiosError.message ||
-               'Unknown Error',
-            list: axiosError?.response?.data?.errors
-               ? { ...axiosError.response.data.errors }
-               : null,
+            message: axiosError?.response?.data?.message || axiosError.message || 'Unknown Error',
+            list: axiosError?.response?.data?.errors ? { ...axiosError.response.data.errors } : null,
          },
       };
    }

@@ -13,20 +13,13 @@ interface WinnersTableProps {
 }
 
 function WinnersTable({ list }: WinnersTableProps) {
-   const pageInHistory = handleTablesPagesHistory('getItem', {
-      key: 'winnersTable',
-   });
+   const pageInHistory = handleTablesPagesHistory('getItem', { key: 'winnersTable' });
    const visibleitemsCount = 10;
    const maxPageCount = Math.ceil(list.length / visibleitemsCount);
-   const [pageNo, setPageNo] = useState(
-      pageInHistory <= maxPageCount ? pageInHistory : maxPageCount
-   );
+   const [pageNo, setPageNo] = useState(pageInHistory <= maxPageCount ? pageInHistory : maxPageCount);
 
    useEffect(() => {
-      handleTablesPagesHistory('update', {
-         key: 'winnersTable',
-         newValue: pageNo,
-      });
+      handleTablesPagesHistory('update', { key: 'winnersTable', newValue: pageNo });
    }, [pageNo]);
    const handlePageChange = (No: number) => setPageNo(No);
    return (
@@ -42,14 +35,9 @@ function WinnersTable({ list }: WinnersTableProps) {
                </tr>
             </thead>
             <tbody>
-               {list
-                  .slice(
-                     (pageNo - 1) * visibleitemsCount,
-                     pageNo * visibleitemsCount
-                  )
-                  .map((car: Winner) => (
-                     <WinnersTableRow key={car?.id} carData={car} />
-                  ))}
+               {list.slice((pageNo - 1) * visibleitemsCount, pageNo * visibleitemsCount).map((car: Winner) => (
+                  <WinnersTableRow key={car?.id} carData={car} />
+               ))}
             </tbody>
          </table>
          {list.length >= visibleitemsCount ? (

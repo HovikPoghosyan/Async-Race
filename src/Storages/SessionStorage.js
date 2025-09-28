@@ -1,7 +1,5 @@
 const handleGarageRaceStatusesHistory = (action, props) => {
-   const data = JSON.parse(
-      sessionStorage.getItem('garageRaceStatusesHistory') || '{}'
-   );
+   const data = JSON.parse(sessionStorage.getItem('garageRaceStatusesHistory') || '{}');
 
    switch (action) {
       case 'delete':
@@ -36,9 +34,7 @@ const handleGarageRaceStatusesHistory = (action, props) => {
 };
 
 const handleTablesPagesHistory = (action, props) => {
-   const data = JSON.parse(
-      sessionStorage.getItem('tablesPagesHistory') || '{}'
-   );
+   const data = JSON.parse(sessionStorage.getItem('tablesPagesHistory') || '{}');
 
    switch (action) {
       case 'update':

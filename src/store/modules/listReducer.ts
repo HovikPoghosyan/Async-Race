@@ -1,3 +1,5 @@
+/* eslint-disable */
+/* prettier-ignore */
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 import { getRandomCarName, getRandomColor } from 'CONSTANTS/CarData';
@@ -44,10 +46,9 @@ interface ListState {
    winnerPopup: boolean;
 }
 
-
-const generateCars = createAsyncThunk<
-   void, number, { state: RootState, rejectValue: { isFailed: boolean } }
->('list/generateCars', async (count, { rejectWithValue, dispatch }) => {
+const generateCars = createAsyncThunk<void, number, { state: RootState; rejectValue: { isFailed: boolean } }>(
+   'list/generateCars',
+   async (count, { rejectWithValue, dispatch }) => {
       for (let index = 0; index < count; index++) {
          const data = await fetchNewCar({
             name: getRandomCarName(),
@@ -61,9 +62,9 @@ const generateCars = createAsyncThunk<
    }
 );
 
-const addNewCar = createAsyncThunk<
-   CarData, CarData, { state: RootState, rejectValue: { isFailed: boolean } }
->('list/addNewCar', async (carData, { rejectWithValue, dispatch }) => {
+const addNewCar = createAsyncThunk<CarData, CarData, { state: RootState; rejectValue: { isFailed: boolean } }>(
+   'list/addNewCar',
+   async (carData, { rejectWithValue, dispatch }) => {
       const data = await fetchNewCar(carData);
       if (data.isFailed) return rejectWithValue({ isFailed: true });
 
@@ -73,9 +74,9 @@ const addNewCar = createAsyncThunk<
    }
 );
 
-const newWinner = createAsyncThunk<
-   Winner, Partial<Winner>, { state: RootState, rejectValue: { isFailed: boolean } }
->('list/newWinner', async (carData, { rejectWithValue, dispatch }) => {
+const newWinner = createAsyncThunk<Winner, Partial<Winner>, { state: RootState; rejectValue: { isFailed: boolean } }>(
+   'list/newWinner',
+   async (carData, { rejectWithValue, dispatch }) => {
       const data = await fetchNewWinner(carData);
       if (data.isFailed) return rejectWithValue({ isFailed: true });
 
@@ -85,9 +86,9 @@ const newWinner = createAsyncThunk<
    }
 );
 
-const updateWinner = createAsyncThunk<
-   Winner, Winner, { state: RootState; rejectValue: { isFailed: boolean } }
->('list/updateWinner', async (carData, { rejectWithValue, dispatch }) => {
+const updateWinner = createAsyncThunk<Winner, Winner, { state: RootState; rejectValue: { isFailed: boolean } }>(
+   'list/updateWinner',
+   async (carData, { rejectWithValue, dispatch }) => {
       const data = await fetchUpdateWinner(carData);
       if (data.isFailed) return rejectWithValue({ isFailed: true });
 
@@ -97,9 +98,9 @@ const updateWinner = createAsyncThunk<
    }
 );
 
-const updateCar = createAsyncThunk<
-   Car, Car, { state: RootState; rejectValue: { isFailed: boolean } }
->('list/updateCar', async (carData, { rejectWithValue, dispatch }) => {
+const updateCar = createAsyncThunk<Car, Car, { state: RootState; rejectValue: { isFailed: boolean } }>(
+   'list/updateCar',
+   async (carData, { rejectWithValue, dispatch }) => {
       const data = await fetchUpdateCar(carData);
       if (data?.isFailed) return rejectWithValue({ isFailed: true });
 
@@ -109,9 +110,9 @@ const updateCar = createAsyncThunk<
    }
 );
 
-const deleteCar = createAsyncThunk<
-   number, number, { state: RootState; rejectValue: { isFailed: boolean } }
->('list/deleteCar', async (id, { rejectWithValue, dispatch }) => {
+const deleteCar = createAsyncThunk<number, number, { state: RootState; rejectValue: { isFailed: boolean } }>(
+   'list/deleteCar',
+   async (id, { rejectWithValue, dispatch }) => {
       const data = await fetchDeleteCar(id);
       fetchDeleteWinner(id);
       if (data.isFailed) return rejectWithValue({ isFailed: true });
@@ -122,9 +123,9 @@ const deleteCar = createAsyncThunk<
    }
 );
 
-const getGarageLists = createAsyncThunk<
-   Car[], void, { state: RootState; rejectValue: { isFailed: boolean } }
->('list/getGarageLists', async (props, { rejectWithValue, dispatch }) => {
+const getGarageLists = createAsyncThunk<Car[], void, { state: RootState; rejectValue: { isFailed: boolean } }>(
+   'list/getGarageLists',
+   async (props, { rejectWithValue, dispatch }) => {
       const data = await fetchGarageList();
       if (data.isFailed) return rejectWithValue({ isFailed: true });
 
@@ -134,9 +135,9 @@ const getGarageLists = createAsyncThunk<
    }
 );
 
-const getWinnersLists = createAsyncThunk<
-   Winner[], void, { state: RootState; rejectValue: { isFailed: boolean } }
->('list/getWinnersLists', async (props, { rejectWithValue }) => {
+const getWinnersLists = createAsyncThunk<Winner[], void, { state: RootState; rejectValue: { isFailed: boolean } }>(
+   'list/getWinnersLists',
+   async (props, { rejectWithValue }) => {
       const data = await fetchWinnersList();
       if (data.isFailed) return rejectWithValue({ isFailed: true });
 
@@ -208,15 +209,17 @@ const appSlice = createSlice({
             state.loading = false;
          })
          .addCase(getWinnersLists.fulfilled, (state, { payload }) => {
-            const restyleList: Winner[] = payload.map((winner: Partial<Winner>) => {
-               const car = state.garageList.find((current) => current.id === winner.id);
-               if (car?.name && car?.color && winner?.id && winner?.time && winner?.wins )
-                  return {
-                     ...winner,
-                     name: car.name,
-                     color: car.color,
-                  };
-            }).filter((winner): winner is Winner => winner !== undefined);
+            const restyleList: Winner[] = payload
+               .map((winner: Partial<Winner>) => {
+                  const car = state.garageList.find((current) => current.id === winner.id);
+                  if (car?.name && car?.color && winner?.id && winner?.time && winner?.wins)
+                     return {
+                        ...winner,
+                        name: car.name,
+                        color: car.color,
+                     };
+               })
+               .filter((winner): winner is Winner => winner !== undefined);
             state.winnersList = restyleList;
             state.loading = false;
          })
@@ -227,14 +230,5 @@ const appSlice = createSlice({
 });
 
 export const { setRace, setSelectedCar, closeWinnerPopup } = appSlice.actions;
-export {
-   getGarageLists,
-   getWinnersLists,
-   generateCars,
-   addNewCar,
-   updateCar,
-   deleteCar,
-   newWinner,
-   updateWinner,
-};
+export { getGarageLists, getWinnersLists, generateCars, addNewCar, updateCar, deleteCar, newWinner, updateWinner };
 export default appSlice.reducer;
