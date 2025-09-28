@@ -50,7 +50,7 @@ function GarageTableRowCntrolBlock({
             { icon: faTrash, color: '#dc3545', disabled: raceStatus === 'started', onClick: handleDelete },
          ].map((btn, i) => (
             <Button
-               key={`BtnNo${btn.icon}`}
+               key={`BtnNo${btn.icon}_${Math.random()}`}
                isDisable={btn.disabled}
                style={styles.controlBlockBtn}
                name={<FontAwesomeIcon icon={btn.icon} color={btn.color} />}
