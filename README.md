@@ -89,6 +89,7 @@ Welcome to the Async Race test task! This SPA allows users to manage a collectio
 Garage Page Screenshotes
 
 <img width="788" height="576" alt="image" src="https://github.com/user-attachments/assets/e6762794-c393-4dce-b5f4-b4ed4b64b24a" />
+
 ---
 Winners Page Screenshot
 
