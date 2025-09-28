@@ -7,7 +7,7 @@ Welcome to the Async Race test task! This SPA allows users to manage a collectio
 
 ---
 
-## ✅ Checklist ( ___/400 pts )
+## ✅ Checklist ( 400/400 pts )
 
 ### 🚀 UI Deployment
 - ✅ UI deployed on GitHub Pages, Netlify, Vercel, or Cloudflare Pages.
