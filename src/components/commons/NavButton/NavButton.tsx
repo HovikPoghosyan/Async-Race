@@ -13,12 +13,12 @@ interface NavButtonProps {
 
 function NavButton({ link, name }: NavButtonProps) {
    const dispatch = useAppDispatch();
-   console.log('name: ', name)
+   console.log('name: ', name);
    return (
       <li>
          <NavLink
-            onClick={() => { 
-               if( name == 'WINNERS' ) dispatch( setRace( false ) );
+            onClick={() => {
+               if (name == 'WINNERS') dispatch(setRace(false));
             }}
             to={link.toLowerCase()}
             className={({ isActive }) => classNames(styles.navButton, { [styles.isActive]: isActive })}

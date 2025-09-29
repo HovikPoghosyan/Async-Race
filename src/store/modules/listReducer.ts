@@ -174,9 +174,9 @@ const appSlice = createSlice({
       closeWinnerPopup(state) {
          state.winnerPopup = false;
       },
-      setWinnersList( state, { payload }) {
+      setWinnersList(state, { payload }) {
          state.winnersList = payload;
-      }
+      },
    },
    extraReducers: (builder) => {
       builder

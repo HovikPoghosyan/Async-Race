@@ -68,8 +68,6 @@ const stopCar = (id: number, setRaceStatus: React.Dispatch<React.SetStateAction<
    setRaceStatus('stopped');
 };
 
-
-
 function UseGarageTableRow(carData: CarData): UseGarageTableRowReturn {
    const dispatch = useAppDispatch();
    const { id } = carData;
@@ -107,12 +105,11 @@ function UseGarageTableRow(carData: CarData): UseGarageTableRowReturn {
    useEffect(() => {
       if (race && race != 'finished') race === 'started' ? handleStart() : handleStop();
    }, [race]);
-   
+
    return { handleStart, handleStop, toggleSelect, handleDelete, raceStatus, animationStyle, handleFinish };
 }
 
 export default UseGarageTableRow;
-
 
 // const handleStart = () => {
 //       setRaceStatus('stopped');
