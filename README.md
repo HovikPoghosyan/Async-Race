@@ -84,3 +84,14 @@ Welcome to the Async Race test task! This SPA allows users to manage a collectio
 2. Revive the project UI using the demo & server mock.
 3. Outpace the competition by delivering a complete, functional, and clean solution.
 
+   
+---
+Garage Page Screenshotes
+
+<img width="788" height="576" alt="image" src="https://github.com/user-attachments/assets/e6762794-c393-4dce-b5f4-b4ed4b64b24a" />
+
+---
+Winners Page Screenshot
+
+<img width="786" height="303" alt="image" src="https://github.com/user-attachments/assets/e62e9504-0736-462f-bae2-af4fb7195656" />
+
