@@ -4,6 +4,7 @@ import { handleTablesPagesHistory } from 'Storages/SessionStorage';
 
 import WinnersTableRow from 'components/commons/WinnersTableRow/WinnersTableRow';
 import Pagination from 'components/commons/Pagination/Pagination';
+import WinnerTableHead from 'components/commons/WinnerTableHead/WinnerTableHead';
 
 import { Winner } from 'store/modules/listReducer';
 import styles from './WinnersTable.module.scss';
@@ -24,6 +25,7 @@ function WinnersTable({ list }: WinnersTableProps) {
    const handlePageChange = (No: number) => setPageNo(No);
    return (
       <>
+         <WinnerTableHead />
          <table className={styles.table}>
             <thead>
                <tr>

@@ -1,0 +1,57 @@
+@import '/src/CONSTANTS/variables';
+
+.toggle {
+   display: inline-flex;
+}
+
+.toggleBtn {
+   padding: 5px 10px;
+   font-weight: 600;
+   color: $text-color;
+   background-color: $clickable-box-background-color;
+   transition: all 0.3s;
+   border: 2px solid $border-color;
+   font-size: 16px;
+   transition: all 0.5s;
+   cursor: pointer;
+   text-wrap: nowrap;
+
+   &:hover {
+      background-color: #ccc;
+      color: #fff;
+   }
+}
+
+.toggleInput {
+   display: none;
+   &:checked + .toggleBtn {
+      color: #fff;
+      border-color: $primary-color;
+      background-color: #48bfee;
+   }
+}
+
+.leftBtn {
+   border-top-left-radius: 15px;
+   border-bottom-left-radius: 15px;
+   border-right-width: 1px;
+}
+
+.rightBtn {
+   border-top-right-radius: 15px;
+   border-bottom-right-radius: 15px;
+   border-left-width: 1px;
+}
+
+
+@media ( max-width: 992px ) {
+   .toggleBtn {
+      font-size: 14px;
+   }
+}
+
+@media ( max-width: 768px ) {
+   .toggleBtn {
+      font-size: 12px;
+   }
+}

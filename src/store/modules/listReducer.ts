@@ -16,6 +16,7 @@ import {
 } from 'CONSTANTS/Axios';
 
 import type { RootState, AppDispatch } from 'store/configureReduxStore';
+import { stat } from 'fs';
 
 export interface Car {
    id: number;
@@ -44,6 +45,8 @@ interface ListState {
    race?: string;
    winner?: Partial<Winner>;
    winnerPopup: boolean;
+   winnersSortBy?: string;
+   winnersSortDirection?: string;
 }
 
 const generateCars = createAsyncThunk<void, number, { state: RootState; rejectValue: { isFailed: boolean } }>(
@@ -153,6 +156,8 @@ const initialState: ListState = {
    race: undefined,
    winner: undefined,
    winnerPopup: false,
+   winnersSortBy: undefined,
+   winnersSortDirection: undefined,
 };
 
 const appSlice = createSlice({
@@ -169,6 +174,9 @@ const appSlice = createSlice({
       closeWinnerPopup(state) {
          state.winnerPopup = false;
       },
+      setWinnersList( state, { payload }) {
+         state.winnersList = payload;
+      }
    },
    extraReducers: (builder) => {
       builder
@@ -229,6 +237,6 @@ const appSlice = createSlice({
    },
 });
 
-export const { setRace, setSelectedCar, closeWinnerPopup } = appSlice.actions;
+export const { setRace, setSelectedCar, closeWinnerPopup, setWinnersList } = appSlice.actions;
 export { getGarageLists, getWinnersLists, generateCars, addNewCar, updateCar, deleteCar, newWinner, updateWinner };
 export default appSlice.reducer;

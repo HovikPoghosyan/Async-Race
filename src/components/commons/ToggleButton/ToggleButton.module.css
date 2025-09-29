@@ -1,0 +1,54 @@
+.toggleBtn {
+  padding: 5px 10px;
+  font-weight: 600;
+  color: #48bfee;
+  background-color: white;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  border: 2px solid #48bfee;
+  font-size: 16px;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+  cursor: pointer;
+  text-wrap: nowrap;
+}
+
+.toggleBtn:hover {
+  background-color: #ccc;
+  color: #fff;
+}
+
+.toggleInput {
+  display: none;
+}
+
+.toggleInput:checked + .toggleBtn {
+  color: #fff;
+  border-color: #48bfee;
+  background-color: #48bfee;
+}
+
+.leftBtn {
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+  border-right-width: 1px;
+}
+
+.rightBtn {
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+  border-left-width: 1px;
+}
+
+@media (max-width: 992px) {
+  .toggleBtn {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 768px) {
+  .toggleBtn {
+    font-size: 12px;
+  }
+}
+/*# sourceMappingURL=ToggleButton.module.css.map */
