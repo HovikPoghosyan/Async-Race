@@ -103,9 +103,12 @@ const updateWinner = createAsyncThunk<Winner, Winner, { state: RootState; reject
 
 const updateCar = createAsyncThunk<Car, Car, { state: RootState; rejectValue: { isFailed: boolean } }>(
    'list/updateCar',
-   async (carData, { rejectWithValue, dispatch }) => {
+   async (carData, { rejectWithValue, dispatch, getState }) => {
       const data = await fetchUpdateCar(carData);
+      const { winnersList } = getState().list;
+      const carInWinnersList = winnersList.find((w) => w.id === carData.id);
       if (data?.isFailed) return rejectWithValue({ isFailed: true });
+      if( !!carInWinnersList ) dispatch(updateWinner( carInWinnersList )).unwrap();;
 
       dispatch(getGarageLists()).unwrap();
 
@@ -115,10 +118,13 @@ const updateCar = createAsyncThunk<Car, Car, { state: RootState; rejectValue: { 
 
 const deleteCar = createAsyncThunk<number, number, { state: RootState; rejectValue: { isFailed: boolean } }>(
    'list/deleteCar',
-   async (id, { rejectWithValue, dispatch }) => {
+   async (id, { rejectWithValue, dispatch, getState }) => {
       const data = await fetchDeleteCar(id);
-      fetchDeleteWinner(id);
+      const { winnersList } = getState().list;
+      const carIsWinner = winnersList.some(( winner ) => winner.id === id);
+      if( carIsWinner ) fetchDeleteWinner(id);
       if (data.isFailed) return rejectWithValue({ isFailed: true });
+
 
       dispatch(getGarageLists()).unwrap();
 
@@ -131,8 +137,6 @@ const getGarageLists = createAsyncThunk<Car[], void, { state: RootState; rejectV
    async (props, { rejectWithValue, dispatch }) => {
       const data = await fetchGarageList();
       if (data.isFailed) return rejectWithValue({ isFailed: true });
-
-      dispatch(getWinnersLists()).unwrap();
 
       return data;
    }
@@ -212,6 +216,7 @@ const appSlice = createSlice({
          })
          .addCase(getGarageLists.fulfilled, (state, { payload }) => {
             state.garageList = payload;
+            state.loading = false;
          })
          .addCase(getGarageLists.rejected, (state, { payload }) => {
             state.loading = false;
