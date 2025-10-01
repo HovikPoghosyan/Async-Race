@@ -15,8 +15,7 @@ import {
    fetchDeleteWinner,
 } from 'CONSTANTS/Axios';
 
-import type { RootState, AppDispatch } from 'store/configureReduxStore';
-import { stat } from 'fs';
+import type { RootState } from 'store/configureReduxStore';
 
 export interface Car {
    id: number;
@@ -51,27 +50,21 @@ interface ListState {
 
 const generateCars = createAsyncThunk<void, number, { state: RootState; rejectValue: { isFailed: boolean } }>(
    'list/generateCars',
-   async (count, { rejectWithValue, dispatch }) => {
+   async (count, { dispatch }) => {
       for (let index = 0; index < count; index++) {
-         const data = await fetchNewCar({
+         dispatch(addNewCar({
             name: getRandomCarName(),
             color: getRandomColor(),
-         });
-
-         if (data.isFailed) return rejectWithValue({ isFailed: true });
+         }));
       }
-
-      dispatch(getGarageLists()).unwrap();
    }
 );
 
 const addNewCar = createAsyncThunk<CarData, CarData, { state: RootState; rejectValue: { isFailed: boolean } }>(
    'list/addNewCar',
-   async (carData, { rejectWithValue, dispatch }) => {
+   async (carData, { rejectWithValue }) => {
       const data = await fetchNewCar(carData);
       if (data.isFailed) return rejectWithValue({ isFailed: true });
-
-      dispatch(getGarageLists()).unwrap();
 
       return data;
    }
@@ -79,11 +72,9 @@ const addNewCar = createAsyncThunk<CarData, CarData, { state: RootState; rejectV
 
 const newWinner = createAsyncThunk<Winner, Partial<Winner>, { state: RootState; rejectValue: { isFailed: boolean } }>(
    'list/newWinner',
-   async (carData, { rejectWithValue, dispatch }) => {
+   async (carData, { rejectWithValue }) => {
       const data = await fetchNewWinner(carData);
       if (data.isFailed) return rejectWithValue({ isFailed: true });
-
-      dispatch(getWinnersLists()).unwrap();
 
       return data;
    }
@@ -91,11 +82,9 @@ const newWinner = createAsyncThunk<Winner, Partial<Winner>, { state: RootState; 
 
 const updateWinner = createAsyncThunk<Winner, Winner, { state: RootState; rejectValue: { isFailed: boolean } }>(
    'list/updateWinner',
-   async (carData, { rejectWithValue, dispatch }) => {
+   async (carData, { rejectWithValue }) => {
       const data = await fetchUpdateWinner(carData);
       if (data.isFailed) return rejectWithValue({ isFailed: true });
-
-      dispatch(getWinnersLists()).unwrap();
 
       return data;
    }
@@ -108,9 +97,7 @@ const updateCar = createAsyncThunk<Car, Car, { state: RootState; rejectValue: { 
       const { winnersList } = getState().list;
       const carInWinnersList = winnersList.find((w) => w.id === carData.id);
       if (data?.isFailed) return rejectWithValue({ isFailed: true });
-      if( !!carInWinnersList ) dispatch(updateWinner( carInWinnersList )).unwrap();;
-
-      dispatch(getGarageLists()).unwrap();
+      if( !!carInWinnersList ) dispatch(updateWinner( carInWinnersList )).unwrap();; 
 
       return data;
    }
@@ -118,15 +105,12 @@ const updateCar = createAsyncThunk<Car, Car, { state: RootState; rejectValue: { 
 
 const deleteCar = createAsyncThunk<number, number, { state: RootState; rejectValue: { isFailed: boolean } }>(
    'list/deleteCar',
-   async (id, { rejectWithValue, dispatch, getState }) => {
+   async (id, { rejectWithValue, getState }) => {
       const data = await fetchDeleteCar(id);
-      const { winnersList } = getState().list;
+      const {winnersList} = getState().list;
       const carIsWinner = winnersList.some(( winner ) => winner.id === id);
-      if( carIsWinner ) fetchDeleteWinner(id);
+      if(carIsWinner) fetchDeleteWinner(id);
       if (data.isFailed) return rejectWithValue({ isFailed: true });
-
-
-      dispatch(getGarageLists()).unwrap();
 
       return data;
    }
@@ -134,7 +118,7 @@ const deleteCar = createAsyncThunk<number, number, { state: RootState; rejectVal
 
 const getGarageLists = createAsyncThunk<Car[], void, { state: RootState; rejectValue: { isFailed: boolean } }>(
    'list/getGarageLists',
-   async (props, { rejectWithValue, dispatch }) => {
+   async (props, { rejectWithValue }) => {
       const data = await fetchGarageList();
       if (data.isFailed) return rejectWithValue({ isFailed: true });
 
@@ -190,26 +174,64 @@ const appSlice = createSlice({
             if (selectedId !== undefined && selectedId === deletingId) {
                state.selectedCar = undefined;
             }
-            state.loading = true;
          })
-         .addCase(generateCars.pending, (state) => {
-            state.loading = true;
+         .addCase(deleteCar.fulfilled, (state, { meta }) => {
+            state.garageList = state.garageList.filter(car => car.id !== meta.arg);
+            state.winnersList = state.winnersList.filter(car => car.id !== meta.arg);
          })
          .addCase(newWinner.pending, (state, { meta }) => {
             state.race = 'finished';
             state.winner = meta.arg;
             state.winnerPopup = true;
          })
-         .addCase(updateWinner.pending, (state, { meta }) => {
+         .addCase(newWinner.fulfilled, (state, { meta }) => {
+            state.winnersList = [
+               ...state.winnersList,
+               {
+                  name: meta.arg.name || 'name',
+                  color: meta.arg.color || '#ccc',
+                  id: meta.arg.id || 3,
+                  time: meta.arg.time || 33,
+                  wins: 1,
+               }
+            ]
+         })
+         .addCase(updateWinner.pending, (state) => {
             state.race = 'finished';
-            state.winner = meta.arg;
-            state.winnerPopup = true;
          })
-         .addCase(addNewCar.pending, (state) => {
-            state.loading = true;
+         .addCase(updateWinner.fulfilled, (state, { meta }) => {
+            state.winnersList = state.winnersList.map(winner => 
+               winner.id === meta.arg.id
+                  ?  { 
+                        ...winner, 
+                        wins: meta.arg.wins, 
+                        time: meta.arg.time,
+                     } 
+                  :  winner
+            );
          })
-         .addCase(updateCar.pending, (state) => {
-            state.loading = true;
+         .addCase(addNewCar.fulfilled, (state, { meta }) => {
+            state.garageList = [
+               ...state.garageList,
+               {
+                  name: meta.arg.name,
+                  color: meta.arg.color,
+                  id: state.garageList.length
+                     ? state.garageList[ state.garageList.length - 1 ].id + 1
+                     : 1
+               }   
+            ]
+         })
+         .addCase(updateCar.fulfilled, (state, { meta }) => {
+            state.garageList = state.garageList.map(car => 
+               car.id === meta.arg.id
+                  ?  { 
+                        color: meta.arg.color,
+                        name: meta.arg.name,
+                        id: meta.arg.id,
+                     } 
+                  :  car
+            );
          })
          .addCase(getGarageLists.pending, (state) => {
             state.loading = true;

@@ -1,7 +1,7 @@
 import React, { CSSProperties, FC, useEffect, useRef, useState } from 'react';
 import { useAppDispatch } from 'store/hooks/hooks';
 
-import { handleTablesPagesHistory } from 'Storages/SessionStorage';
+import handleTablesPagesHistory from 'Storages/SessionStorage';
 import { Car, setRace } from 'store/modules/listReducer';
 
 import FinishLine from 'components/commons/FinishLine/FinishLine';
@@ -30,7 +30,7 @@ function GarageTable({ list }: GarageTableProps) {
    const handlePageChange = (No: number) => setPageNo(No);
    useEffect(() => {
       handleTablesPagesHistory('update', { key: 'garageTable', newValue: pageNo });
-      dispatch(setRace(false));
+      dispatch(setRace('stopped'));
    }, [pageNo]);
    useEffect(() => {
       const tableHeight: number = tableRef?.current?.offsetHeight ?? 50;

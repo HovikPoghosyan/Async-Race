@@ -92,6 +92,7 @@ const fetchCarEngineMode = async (id, status) => {
 };
 
 const fetchNewWinner = async (carData) => {
+   console.log('newWinner Data: ', carData);
    const data = await ajax(URLS.winners, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -120,7 +121,7 @@ const fetchUpdateWinner = async (carData) => {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       data: {
-         wins: carData.wins + 1,
+         wins: carData.wins,
          time: carData.time,
       },
    });

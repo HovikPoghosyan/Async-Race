@@ -1,6 +1,6 @@
 import React, { useState, useEffect, FC } from 'react';
 
-import { handleTablesPagesHistory } from 'Storages/SessionStorage';
+import handleTablesPagesHistory from 'Storages/SessionStorage';
 
 import WinnersTableRow from 'components/commons/WinnersTableRow/WinnersTableRow';
 import Pagination from 'components/commons/Pagination/Pagination';
