@@ -39,7 +39,7 @@ function GarageTable({ list }: GarageTableProps) {
          setPageNo(pageNo - 1);
          setTimeout(() => setStartLineStyle(getStartLineStyle(640)), 0);
       }
-   }, [list]);
+   }, [list, pageNo]);
    return (
       <div className={styles.garageTable} ref={tableRef}>
          <div className={styles.track}>
