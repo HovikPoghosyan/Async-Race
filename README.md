@@ -93,5 +93,6 @@ Garage Page Screenshotes
 ---
 Winners Page Screenshot
 
-<img width="786" height="303" alt="image" src="https://github.com/user-attachments/assets/e62e9504-0736-462f-bae2-af4fb7195656" />
+<img width="783" height="366" alt="image" src="https://github.com/user-attachments/assets/e8daaf9f-7d0e-4eca-9a36-27b5a674b193" />
+
 
