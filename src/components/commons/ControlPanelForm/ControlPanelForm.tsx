@@ -1,13 +1,14 @@
 import React, { ChangeEvent } from 'react';
 
+import { useAppSelector } from 'store/hooks/hooks';
 import ControlPanelFormRow from 'components/commons/ControlPanelFormRow/ControlPanelFormRow';
 import UseControlPanelForm from './UseControlPanelForm';
 
 import styles from './ControlPanelForm.module.scss';
 
 function ControlPanelForm() {
-   const { newCar, updatedCar, handleNewCar, handleUpdatedCar, submitNewCar, submitUpdatedCar, updateBtnDisable } =
-      UseControlPanelForm();
+   const race = useAppSelector((store) => store.garageList.race);
+   const { newCar, updatedCar, handleNewCar, handleUpdatedCar, submitNewCar, submitUpdatedCar, updateBtnDisable } = UseControlPanelForm();
 
    return (
       <form className={styles.form}>
@@ -19,7 +20,7 @@ function ControlPanelForm() {
             handleColor={(event: ChangeEvent<HTMLInputElement>) => handleNewCar({ color: event.target.value })}
             handleSubmit={submitNewCar}
             btnName="Create"
-            isDisable={!newCar.name}
+            isDisable={!newCar.name || race == 'started'}
          />
          <ControlPanelFormRow
             namePlaceholder="Select Car"
@@ -29,7 +30,7 @@ function ControlPanelForm() {
             handleColor={(event: ChangeEvent<HTMLInputElement>) => handleUpdatedCar({ color: event.target.value })}
             handleSubmit={submitUpdatedCar}
             btnName="Update"
-            isDisable={updateBtnDisable}
+            isDisable={updateBtnDisable || race != 'started'}
          />
       </form>
    );

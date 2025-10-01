@@ -2,9 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import { useAppSelector } from 'store/hooks/hooks';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-   faTriangleExclamation,
-} from '@fortawesome/free-solid-svg-icons';
+import { faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
 
 import CarIcon from 'assets/icons/CarIcon/CarIcon';
 import StartLight from '../StartLight/StartLight';
@@ -24,9 +22,8 @@ interface GarageTableRowProps {
 
 function GarageTableRow({ carData }: GarageTableRowProps) {
    const { id, name, color } = carData;
-   const selectedCar = useAppSelector((store) => store.list.selectedCar);
-   const { handleStart, handleStop, toggleSelect, handleDelete, raceStatus, animationStyle, handleFinish } =
-      UseGarageTableRow(carData);
+   const selectedCar = useAppSelector((store) => store.garageList.selectedCar);
+   const { handleStart, handleStop, toggleSelect, handleDelete, raceStatus, animationStyle, handleFinish } = UseGarageTableRow(carData);
 
    return (
       <div className={styles.carTrack}>

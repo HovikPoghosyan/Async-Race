@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import classNames from 'classnames';
-import { setRace } from 'store/modules/listReducer';
+import { setRace } from 'store/modules/garageListReducer';
 import { useAppDispatch } from 'store/hooks/hooks';
 
 import styles from './NavButton.module.scss';

@@ -1,4 +1,4 @@
-import { Winner } from 'store/modules/listReducer';
+import { Winner } from 'store/modules/winnersListReducer';
 
 export type SortBy = 'By Wins' | 'By Time';
 export type SortDirection = 'Increasing' | 'Decreasing';

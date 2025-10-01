@@ -4,7 +4,8 @@ import { useAppDispatch } from 'store/hooks/hooks';
 
 import Header from 'components/layouts/Header/Header';
 
-import { getGarageLists, getWinnersLists } from 'store/modules/listReducer';
+import { getGarageLists } from 'store/modules/garageListReducer';
+import { getWinnersLists } from 'store/modules/winnersListReducer';
 
 import styles from './App.module.scss';
 

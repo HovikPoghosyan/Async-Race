@@ -1,9 +1,9 @@
 import React, { FC, useState, useEffect, CSSProperties } from 'react';
 import { useAppDispatch, useAppSelector } from 'store/hooks/hooks';
 
-// import { handleGarageRaceStatusesHistory } from 'Storages/SessionStorage';
 import { fetchCarEngineMode, fetchCarDrive } from 'CONSTANTS/Axios';
-import { deleteCar, newWinner, setSelectedCar, updateWinner } from 'store/modules/listReducer';
+import { deleteCar, setSelectedCar } from 'store/modules/garageListReducer';
+import { newWinner, updateWinner, Winner } from 'store/modules/winnersListReducer';
 import { AppDispatch } from 'store/configureReduxStore';
 
 import styles from './GarageTableRow.module.scss';
@@ -71,7 +71,8 @@ const stopCar = (id: number, setRaceStatus: React.Dispatch<React.SetStateAction<
 function UseGarageTableRow(carData: CarData): UseGarageTableRowReturn {
    const dispatch = useAppDispatch();
    const { id } = carData;
-   const { selectedCar, race, winner, winnersList } = useAppSelector((store) => store.list);
+   const { selectedCar, race } = useAppSelector((store) => store.garageList);
+   const { winnersList, winner } = useAppSelector((store) => store.winnersList);
    const [time, setTime] = useState<number>(0);
    const [raceStatus, setRaceStatus] = useState<RaceStatus>('stopped');
    const animationStyle: CSSProperties = getAnimationStyle(raceStatus, time);
@@ -80,7 +81,7 @@ function UseGarageTableRow(carData: CarData): UseGarageTableRowReturn {
    const handleStop = () => stopCar(id, setRaceStatus);
    const handleFinish = () => {
       if (race && !winner) {
-         const lastWin = winnersList.find((car) => car.id === id);
+         const lastWin = winnersList.find((winner: Winner) => winner.id === id);
          const timeNewValue = Number((time * 5).toFixed(3));
          if (lastWin)
             dispatch(

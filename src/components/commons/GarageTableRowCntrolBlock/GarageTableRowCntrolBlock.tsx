@@ -1,12 +1,6 @@
 import React, { FC } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-   faPlay,
-   faStop,
-   faTrash,
-   faRefresh,
-   faSliders,
-} from '@fortawesome/free-solid-svg-icons';
+import { faPlay, faStop, faTrash, faRefresh, faSliders } from '@fortawesome/free-solid-svg-icons';
 
 import Button from 'components/commons/Button/Button';
 import styles from './GarageTableRowCntrolBlock.module.scss';

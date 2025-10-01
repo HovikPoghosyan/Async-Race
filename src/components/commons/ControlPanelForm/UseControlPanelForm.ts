@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'store/hooks/hooks';
 
-import { addNewCar, updateCar, setSelectedCar, Car, CarData } from 'store/modules/listReducer';
+import { addNewCar, updateCar, setSelectedCar, Car, CarData } from 'store/modules/garageListReducer';
 
 interface UseControlPanelFormReturn {
    newCar: CarData;
@@ -15,7 +15,7 @@ interface UseControlPanelFormReturn {
 
 function UseControlPanelForm(): UseControlPanelFormReturn {
    const dispatch = useAppDispatch();
-   const selectedCar = useAppSelector((store) => store.list.selectedCar);
+   const selectedCar = useAppSelector((store) => store.garageList.selectedCar);
    const [newCar, setNewCar] = useState<CarData>({ name: '', color: '#48bfee' });
    const [updatedCar, setUpdatedCar] = useState<Car>({ name: '', color: '#48bfee', id: 0 });
    const [updateBtnDisable, setUpdateBtnDisable] = useState(true);

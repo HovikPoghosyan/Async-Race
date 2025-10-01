@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'store/hooks/hooks';
-import { setWinnersList } from 'store/modules/listReducer';
+import { setWinnersList } from 'store/modules/winnersListReducer';
 import sortWinnersList, { SortBy, SortDirection } from './SortWinnersList';
 import ToggleButton from '../ToggleButton/ToggleButton';
 
@@ -8,7 +8,7 @@ import styles from './WinnerTableHead.module.scss';
 
 function WinnerTableHead() {
    const dispatch = useAppDispatch();
-   const winnersList = useAppSelector((store) => store.list.winnersList);
+   const winnersList = useAppSelector((store) => store.winnersList.winnersList);
    const [sortBy, setSortBy] = useState<SortBy>('By Time');
    const [sortDirection, setSortDirection] = useState<SortDirection>('Increasing');
    useEffect(() => {

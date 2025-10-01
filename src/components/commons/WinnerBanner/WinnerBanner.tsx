@@ -2,20 +2,20 @@ import React, { MouseEvent, useEffect, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useAppSelector, useAppDispatch } from 'store/hooks/hooks';
 
-import { closeWinnerPopup } from 'store/modules/listReducer';
+import { closeWinnerPopup } from 'store/modules/garageListReducer';
 import { faTrophy } from '@fortawesome/free-solid-svg-icons';
 
 import styles from './WinnerBanner.module.scss';
 
 function WinnerBanner() {
    const dispatch = useAppDispatch();
-   const { winner, winnerPopup } = useAppSelector((store) => store.list);
+   const { winnerPopup } = useAppSelector((store) => store.garageList);
+   const { winner } = useAppSelector((store) => store.winnersList);
    const handleClose = (event: MouseEvent<HTMLButtonElement>) => {
       const target = event.target as HTMLButtonElement;
       if (target.className == styles.winnerBanner) dispatch(closeWinnerPopup());
    };
    const closingTimerRef = useRef<number | null>(null);
-
    useEffect(() => {
       if (winnerPopup) {
          closingTimerRef.current = window.setTimeout(() => dispatch(closeWinnerPopup()), 5000);

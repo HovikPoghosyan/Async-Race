@@ -2,7 +2,7 @@ import React, { CSSProperties, FC, useEffect, useRef, useState } from 'react';
 import { useAppDispatch } from 'store/hooks/hooks';
 
 import handleTablesPagesHistory from 'Storages/SessionStorage';
-import { Car, setRace } from 'store/modules/listReducer';
+import { Car, setRace } from 'store/modules/garageListReducer';
 
 import FinishLine from 'components/commons/FinishLine/FinishLine';
 import GarageTableRow from 'components/commons/GarageTableRow/GarageTableRow';
@@ -15,8 +15,8 @@ interface GarageTableProps {
 }
 
 const getStartLineStyle = (height: number) => ({
-   fontSize: `${Math.min((height / 100) * 10, 24)}px`,
-   letterSpacing: `${Math.min((height / 100) * 2, 10)}px`,
+   fontSize: `${Math.min((height / 150) * 10, 24)}px`,
+   letterSpacing: `${Math.min((height / 150) * 2, 10)}px`,
 });
 
 function GarageTable({ list }: GarageTableProps) {
@@ -33,9 +33,13 @@ function GarageTable({ list }: GarageTableProps) {
       dispatch(setRace('stopped'));
    }, [pageNo]);
    useEffect(() => {
-      const tableHeight: number = tableRef?.current?.offsetHeight ?? 50;
+      const tableHeight = tableRef?.current?.offsetHeight ?? 500;
       setStartLineStyle(getStartLineStyle(tableHeight));
-   }, []);
+      if (list.length <= (pageNo - 1) * visibleitemsCount) {
+         setPageNo(pageNo - 1);
+         setTimeout(() => setStartLineStyle(getStartLineStyle(640)), 0);
+      }
+   }, [list]);
    return (
       <div className={styles.garageTable} ref={tableRef}>
          <div className={styles.track}>
@@ -48,12 +52,7 @@ function GarageTable({ list }: GarageTableProps) {
             ))}
          </div>
          {list.length > visibleitemsCount ? (
-            <Pagination
-               count={list.length}
-               pageNo={pageNo}
-               changePage={(No) => handlePageChange(No)}
-               visibleitemsCount={visibleitemsCount}
-            />
+            <Pagination count={list.length} pageNo={pageNo} changePage={(No) => handlePageChange(No)} visibleitemsCount={visibleitemsCount} />
          ) : null}
       </div>
    );

@@ -11,7 +11,7 @@ import WinnerBanner from 'components/commons/WinnerBanner/WinnerBanner';
 import styles from './Garage.module.scss';
 
 function Garage() {
-   const { garageList, loading } = useAppSelector((state) => state.list);
+   const { garageList, loading } = useAppSelector((state) => state.garageList);
 
    return (
       <main>

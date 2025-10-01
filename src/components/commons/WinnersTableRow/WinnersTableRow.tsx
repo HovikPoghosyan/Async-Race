@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 
 import CarIcon from 'assets/icons/CarIcon/CarIcon';
 
-import { Winner } from 'store/modules/listReducer';
+import { Winner } from 'store/modules/winnersListReducer';
 import styles from './WinnersTableRow.module.scss';
 
 interface WinnersTableRowProps {

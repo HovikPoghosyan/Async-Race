@@ -11,7 +11,7 @@ import NotFoundMessage from 'components/commons/NotFoundMessage/NotFoundMessage'
 import styles from './Winners.module.scss';
 
 function Winners() {
-   const { winnersList, loading } = useAppSelector((state) => state.list);
+   const { winnersList, loading } = useAppSelector((state) => state.winnersList);
 
    return (
       <main>

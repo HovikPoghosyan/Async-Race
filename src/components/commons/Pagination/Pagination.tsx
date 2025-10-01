@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from 'store/hooks/hooks';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import { setRace } from 'store/modules/listReducer';
+import { setRace } from 'store/modules/garageListReducer';
 
 import Button from 'components/commons/Button/Button';
 
@@ -19,7 +19,7 @@ interface PaginationProps {
 function Pagination({ count, pageNo, changePage, visibleitemsCount }: PaginationProps) {
    const dispatch = useAppDispatch();
    const { pathname } = useLocation();
-   const race = useAppSelector((store) => store.list.race);
+   const race = useAppSelector((store) => store.garageList.race);
    return (
       <div className={styles.pagination}>
          <Button
@@ -41,10 +41,7 @@ function Pagination({ count, pageNo, changePage, visibleitemsCount }: Pagination
                   Next Page <FontAwesomeIcon icon={faArrowRight} />
                </span>
             }
-            isDisable={
-               pageNo == Math.ceil(count / visibleitemsCount) ||
-               (pathname == '/Async-Race/garage' ? race == 'started' : false)
-            }
+            isDisable={pageNo == Math.ceil(count / visibleitemsCount) || (pathname == '/Async-Race/garage' ? race == 'started' : false)}
             functionality={() => {
                changePage(pageNo + 1);
                if (pathname === '/Async-Race/garage') dispatch(setRace('stopped'));

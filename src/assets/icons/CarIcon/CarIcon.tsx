@@ -37,14 +37,7 @@ function SvgPaths() {
    );
 }
 
-function CarIcon({
-   width = 100,
-   height = 100,
-   fill = '#ccc',
-   className = '',
-   style,
-   handleAnimationEnd,
-}: CarIconProps) {
+function CarIcon({ width = 100, height = 100, fill = '#ccc', className = '', style, handleAnimationEnd }: CarIconProps) {
    return (
       <svg
          xmlns="http://www.w3.org/2000/svg"

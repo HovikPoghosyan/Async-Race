@@ -6,7 +6,7 @@ import WinnersTableRow from 'components/commons/WinnersTableRow/WinnersTableRow'
 import Pagination from 'components/commons/Pagination/Pagination';
 import WinnerTableHead from 'components/commons/WinnerTableHead/WinnerTableHead';
 
-import { Winner } from 'store/modules/listReducer';
+import { Winner } from 'store/modules/winnersListReducer';
 import styles from './WinnersTable.module.scss';
 
 interface WinnersTableProps {
