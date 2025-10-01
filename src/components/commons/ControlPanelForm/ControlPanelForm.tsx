@@ -1,4 +1,4 @@
-import React, { FC, ChangeEvent, FormEvent } from 'react';
+import React, { ChangeEvent } from 'react';
 
 import ControlPanelFormRow from 'components/commons/ControlPanelFormRow/ControlPanelFormRow';
 import UseControlPanelForm from './UseControlPanelForm';

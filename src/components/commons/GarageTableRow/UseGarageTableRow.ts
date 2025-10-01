@@ -73,7 +73,7 @@ function UseGarageTableRow(carData: CarData): UseGarageTableRowReturn {
    const { id } = carData;
    const { selectedCar, race, winner, winnersList } = useAppSelector((store) => store.list);
    const [time, setTime] = useState<number>(0);
-   const [raceStatus, setRaceStatus] = useState<RaceStatus>( 'stopped' );
+   const [raceStatus, setRaceStatus] = useState<RaceStatus>('stopped');
    const animationStyle: CSSProperties = getAnimationStyle(raceStatus, time);
 
    const handleStart = () => startCar(id, selectedCar, dispatch, setRaceStatus, setTime);
@@ -97,7 +97,7 @@ function UseGarageTableRow(carData: CarData): UseGarageTableRowReturn {
    const toggleSelect = () => dispatch(setSelectedCar(selectedCar?.id == id ? undefined : carData));
    const handleDelete = () => dispatch(deleteCar(id));
    useEffect(() => {
-      if (race && race != 'finished' && race !== raceStatus ) race === 'started' ? handleStart() : handleStop();
+      if (race && race != 'finished' && race !== raceStatus) race === 'started' ? handleStart() : handleStop();
    }, [race]);
 
    return { handleStart, handleStop, toggleSelect, handleDelete, raceStatus, animationStyle, handleFinish };

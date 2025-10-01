@@ -1,17 +1,11 @@
-import React, { FC, useState } from 'react';
+import React from 'react';
 import classNames from 'classnames';
-import { useAppDispatch, useAppSelector } from 'store/hooks/hooks';
+import { useAppSelector } from 'store/hooks/hooks';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-   faPlay,
-   faStop,
    faTriangleExclamation,
-   faTrash,
-   faRefresh,
-   faSliders,
 } from '@fortawesome/free-solid-svg-icons';
 
-import Button from 'components/commons/Button/Button';
 import CarIcon from 'assets/icons/CarIcon/CarIcon';
 import StartLight from '../StartLight/StartLight';
 

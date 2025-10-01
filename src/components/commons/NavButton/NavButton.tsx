@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
 import classNames from 'classnames';
 import { setRace } from 'store/modules/listReducer';
@@ -13,7 +13,7 @@ interface NavButtonProps {
 
 function NavButton({ link, name }: NavButtonProps) {
    const dispatch = useAppDispatch();
-   
+
    return (
       <li>
          <NavLink

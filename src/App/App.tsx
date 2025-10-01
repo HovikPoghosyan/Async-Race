@@ -15,9 +15,9 @@ function App() {
          const { payload } = response;
          if (payload && !payload?.isFail) {
             sessionStorage.setItem('tablesPagesHistory', JSON.stringify({ garageTable: 1, winnersTable: 1 }));
+            dispatch(getWinnersLists());
          }
       });
-      dispatch(getWinnersLists());
    }, []);
    return (
       <div className="wrapper">

@@ -52,10 +52,12 @@ const generateCars = createAsyncThunk<void, number, { state: RootState; rejectVa
    'list/generateCars',
    async (count, { dispatch }) => {
       for (let index = 0; index < count; index++) {
-         dispatch(addNewCar({
-            name: getRandomCarName(),
-            color: getRandomColor(),
-         }));
+         dispatch(
+            addNewCar({
+               name: getRandomCarName(),
+               color: getRandomColor(),
+            })
+         );
       }
    }
 );
@@ -97,7 +99,7 @@ const updateCar = createAsyncThunk<Car, Car, { state: RootState; rejectValue: { 
       const { winnersList } = getState().list;
       const carInWinnersList = winnersList.find((w) => w.id === carData.id);
       if (data?.isFailed) return rejectWithValue({ isFailed: true });
-      if( !!carInWinnersList ) dispatch(updateWinner( carInWinnersList )).unwrap();; 
+      if (!!carInWinnersList) dispatch(updateWinner(carInWinnersList)).unwrap();
 
       return data;
    }
@@ -107,9 +109,9 @@ const deleteCar = createAsyncThunk<number, number, { state: RootState; rejectVal
    'list/deleteCar',
    async (id, { rejectWithValue, getState }) => {
       const data = await fetchDeleteCar(id);
-      const {winnersList} = getState().list;
-      const carIsWinner = winnersList.some(( winner ) => winner.id === id);
-      if(carIsWinner) fetchDeleteWinner(id);
+      const { winnersList } = getState().list;
+      const carIsWinner = winnersList.some((winner) => winner.id === id);
+      if (carIsWinner) fetchDeleteWinner(id);
       if (data.isFailed) return rejectWithValue({ isFailed: true });
 
       return data;
@@ -176,8 +178,8 @@ const appSlice = createSlice({
             }
          })
          .addCase(deleteCar.fulfilled, (state, { meta }) => {
-            state.garageList = state.garageList.filter(car => car.id !== meta.arg);
-            state.winnersList = state.winnersList.filter(car => car.id !== meta.arg);
+            state.garageList = state.garageList.filter((car) => car.id !== meta.arg);
+            state.winnersList = state.winnersList.filter((car) => car.id !== meta.arg);
          })
          .addCase(newWinner.pending, (state, { meta }) => {
             state.race = 'finished';
@@ -193,21 +195,21 @@ const appSlice = createSlice({
                   id: meta.arg.id || 3,
                   time: meta.arg.time || 33,
                   wins: 1,
-               }
-            ]
+               },
+            ];
          })
          .addCase(updateWinner.pending, (state) => {
             state.race = 'finished';
          })
          .addCase(updateWinner.fulfilled, (state, { meta }) => {
-            state.winnersList = state.winnersList.map(winner => 
+            state.winnersList = state.winnersList.map((winner) =>
                winner.id === meta.arg.id
-                  ?  { 
-                        ...winner, 
-                        wins: meta.arg.wins, 
-                        time: meta.arg.time,
-                     } 
-                  :  winner
+                  ? {
+                       ...winner,
+                       wins: meta.arg.wins,
+                       time: meta.arg.time,
+                    }
+                  : winner
             );
          })
          .addCase(addNewCar.fulfilled, (state, { meta }) => {
@@ -216,21 +218,19 @@ const appSlice = createSlice({
                {
                   name: meta.arg.name,
                   color: meta.arg.color,
-                  id: state.garageList.length
-                     ? state.garageList[ state.garageList.length - 1 ].id + 1
-                     : 1
-               }   
-            ]
+                  id: state.garageList.length ? state.garageList[state.garageList.length - 1].id + 1 : 1,
+               },
+            ];
          })
          .addCase(updateCar.fulfilled, (state, { meta }) => {
-            state.garageList = state.garageList.map(car => 
+            state.garageList = state.garageList.map((car) =>
                car.id === meta.arg.id
-                  ?  { 
-                        color: meta.arg.color,
-                        name: meta.arg.name,
-                        id: meta.arg.id,
-                     } 
-                  :  car
+                  ? {
+                       color: meta.arg.color,
+                       name: meta.arg.name,
+                       id: meta.arg.id,
+                    }
+                  : car
             );
          })
          .addCase(getGarageLists.pending, (state) => {

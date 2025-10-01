@@ -23,4 +23,4 @@ const handleTablesPagesHistory = (action, props) => {
    }
 };
 
-export default handleTablesPagesHistory ;
+export default handleTablesPagesHistory;
