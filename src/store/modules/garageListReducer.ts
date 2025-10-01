@@ -84,11 +84,11 @@ const deleteCar = createAsyncThunk<number, number, { state: RootState; rejectVal
    }
 );
 
-const getGarageLists = createAsyncThunk<Car[], void, { state: RootState; rejectValue: { isFailed: boolean } }>(
+const getGarageLists = createAsyncThunk<Car[], void, { state: RootState; rejectValue: { isFailed: boolean, errorMessage: string } }>(
    'garageList/getGarageLists',
    async (props, { rejectWithValue }) => {
       const data = await fetchGarageList();
-      if (data.isFailed) return rejectWithValue({ isFailed: true });
+      if (data.isFailed) return rejectWithValue({ isFailed: true, errorMessage: data.errors.message });
 
       return data;
    }
