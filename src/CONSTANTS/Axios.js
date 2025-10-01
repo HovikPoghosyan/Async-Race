@@ -17,7 +17,6 @@ const ajax = async (url, { method = 'get', headers = {}, data = {} }) => {
       });
       return response?.data;
    } catch (axiosError) {
-      console.log(axiosError)
       return {
          isFailed: true,
          status: axiosError?.status,

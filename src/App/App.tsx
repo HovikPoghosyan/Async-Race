@@ -12,7 +12,7 @@ import styles from './App.module.scss';
 
 function App() {
    const dispatch = useAppDispatch();
-   const [ errorMessage, setErrorMessage ] = useState<string>('');
+   const [errorMessage, setErrorMessage] = useState<string>('');
 
    useEffect(() => {
       dispatch(getGarageLists()).then((response: any) => {
@@ -23,16 +23,11 @@ function App() {
          } else setErrorMessage(payload.errorMessage);
       });
    }, []);
-   console.log('errorMessage: ', errorMessage)
    return (
       <div className="wrapper">
          <div className="container">
             <Header />
-            {
-               errorMessage 
-                  ?  <NotFoundMessage message={ errorMessage } />
-                  :  <Outlet />
-            }
+            {errorMessage ? <NotFoundMessage message={errorMessage} /> : <Outlet />}
          </div>
       </div>
    );
