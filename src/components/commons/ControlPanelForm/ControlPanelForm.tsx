@@ -30,7 +30,7 @@ function ControlPanelForm() {
             handleColor={(event: ChangeEvent<HTMLInputElement>) => handleUpdatedCar({ color: event.target.value })}
             handleSubmit={submitUpdatedCar}
             btnName="Update"
-            isDisable={updateBtnDisable || race != 'started'}
+            isDisable={updateBtnDisable}
          />
       </form>
    );
