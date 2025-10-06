@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 
 import NavButton from 'components/commons/NavButton/NavButton';
 

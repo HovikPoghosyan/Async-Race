@@ -1,26 +1,27 @@
-import React, { FC, useEffect, useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Outlet, useLocation,useMatches } from 'react-router-dom';
 import { useAppDispatch } from 'store/hooks/hooks';
 import NotFoundMessage from 'components/commons/NotFoundMessage/NotFoundMessage';
 
 import Header from 'components/layouts/Header/Header';
 
-import { getGarageLists } from 'store/modules/garageListReducer';
-import { getWinnersLists } from 'store/modules/winnersListReducer';
+import { getGarageListPage } from 'store/modules/garageListReducer';
+import { getWinnersListPage } from 'store/modules/winnersListReducer';
 
 import styles from './App.module.scss';
 
 function App() {
    const dispatch = useAppDispatch();
    const [errorMessage, setErrorMessage] = useState<string>('');
+   const matches = useMatches();
 
    useEffect(() => {
-      dispatch(getGarageLists()).then((response: any) => {
+      dispatch(getGarageListPage(1)).then((response: any) => {
          const { payload } = response;
-         if (payload && !payload?.errorMessage) {
+         if (payload && !payload?.errorMessage ) {
             sessionStorage.setItem('tablesPagesHistory', JSON.stringify({ garageTable: 1, winnersTable: 1 }));
-            dispatch(getWinnersLists());
-         } else setErrorMessage(payload.errorMessage);
+            dispatch(getWinnersListPage(1));
+         } else if (!matches[1]?.params['*']) setErrorMessage(payload.errorMessage);
       });
    }, []);
    return (

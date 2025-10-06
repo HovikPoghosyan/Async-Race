@@ -1,8 +1,9 @@
-import React, { FC } from 'react';
+import React, { useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrophy } from '@fortawesome/free-solid-svg-icons';
 
-import { useAppSelector } from 'store/hooks/hooks';
+import { useAppDispatch, useAppSelector } from 'store/hooks/hooks';
+import { getWinnersListPage } from 'store/modules/winnersListReducer';
 
 import WinnersTable from 'components/featues/WinnersTable/WinnersTable';
 import LoadingCircle from 'components/featues/LoadingCircle/LoadingCircle';
@@ -11,8 +12,12 @@ import NotFoundMessage from 'components/commons/NotFoundMessage/NotFoundMessage'
 import styles from './Winners.module.scss';
 
 function Winners() {
-   const { winnersList, loading } = useAppSelector((state) => state.winnersList);
+   const dispatch = useAppDispatch();
+   const { winnersList, loading, count } = useAppSelector((state) => state.winnersList);
 
+   useEffect(() => {
+      if (count == 0) dispatch(getWinnersListPage(1));
+   }, []);
    return (
       <main>
          <div className={styles.winnersHead}>
@@ -22,7 +27,7 @@ function Winners() {
          </div>
          {loading ? (
             <LoadingCircle />
-         ) : winnersList[0] ? (
+         ) : count !== 0 ? (
             <WinnersTable list={winnersList} />
          ) : (
             <NotFoundMessage message="No winners at the moment. Keep watching!" />

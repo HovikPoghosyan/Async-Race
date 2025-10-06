@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { getRandomCarName, getRandomColor } from 'CONSTANTS/CarData';
-import { fetchGarageList, fetchNewCar, fetchDeleteCar, fetchUpdateCar } from 'CONSTANTS/Axios';
+import { fetchGarageListPage, fetchNewCar, fetchDeleteCar, fetchUpdateCar } from 'CONSTANTS/Axios';
 import type { RootState } from 'store/configureReduxStore';
 import { deleteWinner, Winner, updateWinner } from './winnersListReducer';
 
@@ -21,21 +21,23 @@ interface GarageListState {
    loading: boolean;
    race: string;
    winnerPopup: boolean;
+   count: number;
 }
 
 const initialState: GarageListState = {
    garageList: [],
    selectedCar: undefined,
-   loading: false,
+   loading: true,
    race: 'stopped',
    winnerPopup: false,
+   count: 0,
 };
 
 const generateCars = createAsyncThunk<void, number, { state: RootState; rejectValue: { isFailed: boolean } }>(
    'garageList/generateCars',
    async (count, { dispatch }) => {
       for (let index = 0; index < count; index++) {
-         dispatch(
+         await dispatch(
             addNewCar({
                name: getRandomCarName(),
                color: getRandomColor(),
@@ -48,49 +50,49 @@ const generateCars = createAsyncThunk<void, number, { state: RootState; rejectVa
 const addNewCar = createAsyncThunk<CarData, CarData, { state: RootState; rejectValue: { isFailed: boolean } }>(
    'garageList/addNewCar',
    async (carData, { rejectWithValue }) => {
-      const data = await fetchNewCar(carData);
-      if (data.isFailed) return rejectWithValue({ isFailed: true });
+      const response = await fetchNewCar(carData);
+      if (response?.isFailed) return rejectWithValue({ isFailed: true });
 
-      return data;
+      return response;
    }
 );
 
 const updateCar = createAsyncThunk<Car, Car, { state: RootState; rejectValue: { isFailed: boolean } }>(
    'list/updateCar',
    async (carData, { rejectWithValue, dispatch, getState }) => {
-      const data = await fetchUpdateCar(carData);
+      const response = await fetchUpdateCar(carData);
       const { winnersList } = getState().winnersList;
       const carInWinnersList = winnersList.find((winner: Winner) => winner.id === carData.id);
-      if (data?.isFailed) return rejectWithValue({ isFailed: true });
+      if (response?.isFailed) return rejectWithValue({ isFailed: true });
       if (carInWinnersList) dispatch(updateWinner({ ...carInWinnersList, ...carData })).unwrap();
 
-      return data;
+      return response;
    }
 );
 
 const deleteCar = createAsyncThunk<number, number, { state: RootState; rejectValue: { isFailed: boolean } }>(
    'garageList/deleteCar',
    async (id, { rejectWithValue, getState, dispatch }) => {
-      const data = await fetchDeleteCar(id);
+      const response = await fetchDeleteCar(id);
       const { winnersList } = getState().winnersList;
       const carIsWinner = winnersList.some((winner: Winner) => winner.id === id);
-      console.log('carIsWinner: ', carIsWinner);
       if (carIsWinner) {
          dispatch(deleteWinner(id));
       }
-      if (data.isFailed) return rejectWithValue({ isFailed: true });
+      if (response.isFailed) return rejectWithValue({ isFailed: true });
 
-      return data;
+      return response;
    }
 );
 
-const getGarageLists = createAsyncThunk<Car[], void, { state: RootState; rejectValue: { isFailed: boolean; errorMessage: string } }>(
-   'garageList/getGarageLists',
-   async (props, { rejectWithValue }) => {
-      const data = await fetchGarageList();
-      if (data.isFailed) return rejectWithValue({ isFailed: true, errorMessage: data.errors.message });
+const getGarageListPage = createAsyncThunk<any, number, { state: RootState; rejectValue: { isFailed: boolean; errorMessage: string } }>(
+   'garageList/getGarageList',
+   async (pageNo, { rejectWithValue }) => {
+      console.log('getGarageList');
+      const response = await fetchGarageListPage(pageNo);
+      if (response.isFailed) return rejectWithValue({ isFailed: true, errorMessage: response.errors.message });
 
-      return data;
+      return response;
    }
 );
 
@@ -113,31 +115,34 @@ const garageListReducer = createSlice({
    },
    extraReducers: (builder) => {
       builder
+         // .addCase(generateCars.pending, (state ) => { state.loading = true })
+         // .addCase(generateCars.fulfilled, (state, { meta }) => { state.loading = false })
          .addCase(addNewCar.fulfilled, (state, { meta }) => {
-            state.garageList.push({
-               ...meta.arg,
-               id: state.garageList.length ? state.garageList[state.garageList.length - 1].id + 1 : 1,
-            });
+            state.count += 1;
          })
          .addCase(updateCar.fulfilled, (state, { meta }) => {
             state.garageList = state.garageList.map((car) => (car.id === meta.arg.id ? { ...car, ...meta.arg } : car));
          })
          .addCase(deleteCar.fulfilled, (state, { meta }) => {
             state.garageList = state.garageList.filter((car) => car.id !== meta.arg);
+            state.selectedCar = state.selectedCar?.id == meta.arg ? undefined : state.selectedCar;
+            state.count -= 1;
          })
-         .addCase(getGarageLists.pending, (state) => {
+         .addCase(getGarageListPage.pending, (state) => {
             state.loading = true;
          })
-         .addCase(getGarageLists.fulfilled, (state, { payload }) => {
-            state.garageList = payload;
+         .addCase(getGarageListPage.fulfilled, (state, { payload }) => {
+            const list = [...state.garageList, ...payload.data].sort((carOne, carSecond) => carOne.id - carSecond.id);
+            state.garageList = Array.from(new Map(list.map((item) => [item.id, item])).values());
+            state.count = Number(payload.headers['x-total-count']);
             state.loading = false;
          })
-         .addCase(getGarageLists.rejected, (state) => {
+         .addCase(getGarageListPage.rejected, (state) => {
             state.loading = false;
          });
    },
 });
 
 export const { setSelectedCar, closeWinnerPopup, setRace, openWinnerPopup } = garageListReducer.actions;
-export { generateCars, addNewCar, updateCar, deleteCar, getGarageLists };
+export { generateCars, addNewCar, updateCar, deleteCar, getGarageListPage };
 export default garageListReducer.reducer;

@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFlagCheckered } from '@fortawesome/free-solid-svg-icons';
 import styles from './Logo.module.scss';

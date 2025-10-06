@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React from 'react';
 
 import { useAppSelector } from 'store/hooks/hooks';
 
@@ -11,19 +11,18 @@ import WinnerBanner from 'components/commons/WinnerBanner/WinnerBanner';
 import styles from './Garage.module.scss';
 
 function Garage() {
-   const { garageList, loading } = useAppSelector((state) => state.garageList);
-
+   const { garageList, loading, count } = useAppSelector((store) => store.garageList);
    return (
       <main>
          <GarageControlPanel />
          {loading ? (
             <LoadingCircle />
-         ) : garageList.length ? (
+         ) : count !== 0 ? (
             <GarageTable list={garageList} />
          ) : (
             <NotFoundMessage message="No cars yet. Add one to get started!" />
          )}
-         <WinnerBanner />
+         {loading ? null : <WinnerBanner />}
       </main>
    );
 }

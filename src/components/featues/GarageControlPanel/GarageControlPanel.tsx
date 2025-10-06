@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 
 import ControlPanelForm from 'components/commons/ControlPanelForm/ControlPanelForm';
 import ControlPanelRightAside from 'components/commons/ControlPanelRightAside/ControlPanelRightAside';

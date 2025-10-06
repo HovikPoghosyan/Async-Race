@@ -1,8 +1,8 @@
-import React, { CSSProperties, FC, useEffect, useRef, useState } from 'react';
-import { useAppDispatch } from 'store/hooks/hooks';
+import React, { CSSProperties, useEffect, useRef, useState } from 'react';
+import { useAppDispatch, useAppSelector } from 'store/hooks/hooks';
 
 import handleTablesPagesHistory from 'Storages/SessionStorage';
-import { Car, setRace } from 'store/modules/garageListReducer';
+import { Car, setRace, getGarageListPage } from 'store/modules/garageListReducer';
 
 import FinishLine from 'components/commons/FinishLine/FinishLine';
 import GarageTableRow from 'components/commons/GarageTableRow/GarageTableRow';
@@ -21,6 +21,7 @@ const getStartLineStyle = (height: number) => ({
 
 function GarageTable({ list }: GarageTableProps) {
    const dispatch = useAppDispatch();
+   const count = useAppSelector((store) => store.garageList.count);
    const pageInHistory = handleTablesPagesHistory('getItem', { key: 'garageTable' });
    const visibleitemsCount = 7;
    const maxPageCount = Math.ceil(list.length / visibleitemsCount);
@@ -35,11 +36,10 @@ function GarageTable({ list }: GarageTableProps) {
    useEffect(() => {
       const tableHeight = tableRef?.current?.offsetHeight ?? 500;
       setStartLineStyle(getStartLineStyle(tableHeight));
-      if (list.length <= (pageNo - 1) * visibleitemsCount) {
-         setPageNo(pageNo - 1);
-         setTimeout(() => setStartLineStyle(getStartLineStyle(640)), 0);
-      }
-   }, [list, pageNo]);
+      if (list.length <= (pageNo - 1) * visibleitemsCount) dispatch(getGarageListPage(pageNo));
+      if (count < pageNo * visibleitemsCount && list.length != count) dispatch(getGarageListPage(pageNo));
+      if (count >= pageNo * visibleitemsCount && list.length < pageNo * visibleitemsCount) dispatch(getGarageListPage(pageNo));
+   }, [list, pageNo, count]);
    return (
       <div className={styles.garageTable} ref={tableRef}>
          <div className={styles.track}>
@@ -51,8 +51,8 @@ function GarageTable({ list }: GarageTableProps) {
                <GarageTableRow key={car.id} carData={car} />
             ))}
          </div>
-         {list.length > visibleitemsCount ? (
-            <Pagination count={list.length} pageNo={pageNo} changePage={(No) => handlePageChange(No)} visibleitemsCount={visibleitemsCount} />
+         {count > visibleitemsCount ? (
+            <Pagination count={count} pageNo={pageNo} changePage={(No) => handlePageChange(No)} visibleitemsCount={visibleitemsCount} />
          ) : null}
       </div>
    );

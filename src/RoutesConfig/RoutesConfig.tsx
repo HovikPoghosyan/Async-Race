@@ -4,6 +4,7 @@ import { createBrowserRouter, Navigate, RouteObject } from 'react-router-dom';
 import App from 'App/App';
 import Garage from 'pages/Garage/Garage';
 import Winners from 'pages/Winners/Winners';
+import NotFound from 'pages/NotFound/NotFound';
 
 function routesConfig(): ReturnType<typeof createBrowserRouter> {
    const routes: RouteObject[] = [
@@ -23,8 +24,16 @@ function routesConfig(): ReturnType<typeof createBrowserRouter> {
                path: 'winners',
                element: <Winners />,
             },
+            {
+               path: '*',
+               element: <NotFound />,
+            },
          ],
       },
+      {
+         path: '*',
+         element: <NotFound />
+      }
    ];
 
    return createBrowserRouter(routes);

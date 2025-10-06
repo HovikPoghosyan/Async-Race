@@ -1,4 +1,4 @@
-import React, { FC, CSSProperties, AnimationEventHandler } from 'react';
+import React, { CSSProperties, AnimationEventHandler } from 'react';
 
 interface CarIconProps {
    width?: number;

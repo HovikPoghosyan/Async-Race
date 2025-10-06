@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from 'store/hooks/hooks';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

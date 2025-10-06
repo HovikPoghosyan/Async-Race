@@ -7,7 +7,7 @@ const URLS = {
    engine: `${API_BASE}/engine`,
 };
 
-const ajax = async (url, { method = 'get', headers = {}, data = {} }) => {
+const ajax = async (url, { method = 'get', headers = {}, data = {}, returnHeaders }) => {
    try {
       const response = await axios({
          url,
@@ -15,7 +15,13 @@ const ajax = async (url, { method = 'get', headers = {}, data = {} }) => {
          data,
          headers,
       });
-      return response?.data;
+
+      return returnHeaders
+         ? {
+              data: response.data,
+              headers: { ...response.headers },
+           }
+         : response.data;
    } catch (axiosError) {
       return {
          isFailed: true,
@@ -28,18 +34,33 @@ const ajax = async (url, { method = 'get', headers = {}, data = {} }) => {
    }
 };
 
-const fetchGarageList = async () => {
-   const data = await ajax(URLS.garage, {
+const fetchGarageListPage = async (pageNo) => {
+   const queryParams = new URLSearchParams({ _page: pageNo, _limit: '7' });
+   const data = await ajax(`${URLS.garage}?${queryParams.toString()}`, {
       method: 'GET',
       headers: {},
       data: {},
+      returnHeaders: true,
    });
 
    return data;
 };
 
-const fetchWinnersList = async () => {
-   const data = await ajax(URLS.winners, {
+const fetchWinnersListPage = async (pageNo) => {
+   const queryParams = new URLSearchParams({ _page: pageNo, _limit: '10' });
+   const data = await ajax(`${URLS.winners}?${queryParams.toString()}`, {
+      method: 'GET',
+      headers: {},
+      data: {},
+      returnHeaders: true,
+   });
+
+   return data;
+};
+
+const fetchCarData = async (id) => {
+   const queryParams = new URLSearchParams({ id });
+   const data = await ajax(`${URLS.garage}?${queryParams.toString()}`, {
       method: 'GET',
       headers: {},
       data: {},
@@ -141,8 +162,6 @@ const fetchCarDrive = async (id) => {
 
 export {
    fetchDeleteWinner,
-   fetchGarageList,
-   fetchWinnersList,
    fetchUpdateCar,
    fetchDeleteCar,
    fetchNewCar,
@@ -150,5 +169,8 @@ export {
    fetchNewWinner,
    fetchUpdateWinner,
    fetchCarDrive,
+   fetchGarageListPage,
+   fetchWinnersListPage,
+   fetchCarData,
 };
 export default ajax;

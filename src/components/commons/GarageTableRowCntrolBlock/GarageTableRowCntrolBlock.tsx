@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay, faStop, faTrash, faRefresh, faSliders } from '@fortawesome/free-solid-svg-icons';
 

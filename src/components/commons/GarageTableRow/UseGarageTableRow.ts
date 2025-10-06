@@ -2,7 +2,7 @@ import React, { FC, useState, useEffect, CSSProperties } from 'react';
 import { useAppDispatch, useAppSelector } from 'store/hooks/hooks';
 
 import { fetchCarEngineMode, fetchCarDrive } from 'CONSTANTS/Axios';
-import { deleteCar, setSelectedCar } from 'store/modules/garageListReducer';
+import { deleteCar, setSelectedCar, setRace, openWinnerPopup } from 'store/modules/garageListReducer';
 import { newWinner, updateWinner, Winner } from 'store/modules/winnersListReducer';
 import { AppDispatch } from 'store/configureReduxStore';
 
@@ -83,7 +83,7 @@ function UseGarageTableRow(carData: CarData): UseGarageTableRowReturn {
       if (race && !winner) {
          const lastWin = winnersList.find((winner: Winner) => winner.id === id);
          const timeNewValue = Number((time * 5).toFixed(3));
-         if (lastWin)
+         if (lastWin) {
             dispatch(
                updateWinner({
                   ...lastWin,
@@ -91,7 +91,9 @@ function UseGarageTableRow(carData: CarData): UseGarageTableRowReturn {
                   time: Math.min(lastWin.time, timeNewValue),
                })
             );
-         else dispatch(newWinner({ ...carData, time: timeNewValue }));
+            dispatch(setRace('finished'));
+            dispatch(openWinnerPopup());
+         } else dispatch(newWinner({ ...carData, time: timeNewValue }));
       }
       setRaceStatus('finished');
    };
