@@ -80,7 +80,7 @@ function UseGarageTableRow(carData: CarData): UseGarageTableRowReturn {
    const handleStart = () => startCar(id, selectedCar, dispatch, setRaceStatus, setTime);
    const handleStop = () => stopCar(id, setRaceStatus);
    const handleFinish = () => {
-      if (race && !winner) {
+      if (race == 'started' && !winner) {
          const lastWin = winnersList.find((winner: Winner) => winner.id === id);
          const timeNewValue = Number((time * 5).toFixed(3));
          if (lastWin) {
