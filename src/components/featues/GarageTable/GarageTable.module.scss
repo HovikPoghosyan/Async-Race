@@ -14,11 +14,7 @@
    border-left: 0;
    border-right: 0;
    border-image-slice: 1;
-   border-image-source: linear-gradient(
-      90deg,
-      $primary-color 10%,
-      $secondary-color 90%
-   );
+   border-image-source: linear-gradient(90deg, $primary-color 10%, $secondary-color 90%);
    display: grid;
    gap: 10px;
 }
@@ -30,7 +26,7 @@
    height: 100%;
    text-align: center;
    font-weight: var(--font-weight-extra-bold);
-   z-index: 2;
+   z-index: 3;
    left: 133px;
    background-color: #13151f;
    color: $text-color;

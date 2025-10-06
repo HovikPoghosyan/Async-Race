@@ -23,7 +23,6 @@
    border-bottom: none;
 
    &:nth-child(even) {
-      border-image: repeating-linear-gradient(0deg, white 0 5px, black 5px 10px)
-         1;
+      border-image: repeating-linear-gradient(0deg, white 0 5px, black 5px 10px) 1;
    }
 }

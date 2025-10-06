@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,gBAAgB,CAAC;EACd,OAAO,EAAE,IAAI;EACb,cAAc,EAAE,GAAG;EACnB,eAAe,EAAE,aAAa;CAChC",
+    "sources": [
+        "WinnerTableHead.module.scss"
+    ],
+    "names": [],
+    "file": "WinnerTableHead.module.css"
+}

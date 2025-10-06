@@ -1,0 +1,13 @@
+@import '/src/CONSTANTS/variables';
+
+.title {
+   text-align: center;
+   margin-top: 30vh;
+   background: linear-gradient(90deg, $primary-color 10%, $secondary-color 90%);
+   -webkit-background-clip: text;
+   -webkit-text-fill-color: transparent;
+   background-clip: text;
+   color: transparent;
+   font-size: var(--font-size-bigger);
+   font-weight: var(--font-weight-extra-bold);
+}
